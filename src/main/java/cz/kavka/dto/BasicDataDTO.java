@@ -7,6 +7,8 @@ import java.util.List;
 @Data
 public class BasicDataDTO {
 
+    private Long id;
+
     private String schoolName;
 
     private String address;
@@ -41,4 +43,6 @@ public class BasicDataDTO {
     private String dataBox;
 
     private String accountNumber;
+
+    private RequiredInformationDTO requiredInformation;
 }

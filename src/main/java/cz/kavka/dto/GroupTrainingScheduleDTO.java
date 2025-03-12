@@ -10,5 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StudyFocusDTO extends NameAndContentDTO {
+public class GroupTrainingScheduleDTO extends NameAndContentDTO {
 }

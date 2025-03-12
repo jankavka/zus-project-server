@@ -1,15 +1,11 @@
 package cz.kavka.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class RequiredInformationDTO {
+
+    private Long id;
 
     private String establishment;
 
@@ -17,9 +13,19 @@ public class RequiredInformationDTO {
 
     private String contact;
 
-    private  BasicDataDTO basicData;
+    private BasicDataDTO basicData;
 
     private String documents;
+
+    private String submissionsAndSuggestions;
+
+    private String regulations;
+
+    private String paymentsForProvidingInformation;
+
+    private String LicenseAgreements;
+
+    private String annualReport;
 
 
 }

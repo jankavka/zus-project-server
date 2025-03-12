@@ -4,11 +4,12 @@ import cz.kavka.dto.BasicDataDTO;
 import cz.kavka.dto.mapper.BasicDataMapper;
 import cz.kavka.entity.BasicDataEntity;
 import cz.kavka.entity.repository.BasicDataRepository;
+import cz.kavka.service.serviceInterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BasicDataServiceImpl implements BasicDataService{
+public class BasicDataServiceImpl implements BasicDataService {
 
     private final BasicDataRepository basicDataRepository;
 
@@ -22,6 +23,7 @@ public class BasicDataServiceImpl implements BasicDataService{
 
     @Override
     public BasicDataDTO create(BasicDataDTO basicDataDTO) {
+        basicDataDTO.setId(1L);
         BasicDataEntity savedEntity = basicDataRepository.save(basicDataMapper.toEntity(basicDataDTO));
         return basicDataMapper.toDTO(savedEntity);
     }

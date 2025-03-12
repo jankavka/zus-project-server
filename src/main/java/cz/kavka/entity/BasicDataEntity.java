@@ -10,7 +10,7 @@ import java.util.List;
 public class BasicDataEntity {
 
     @Id
-    private final Long id = 1L;
+    private final Long id;
 
     @Column
     private String schoolName;
@@ -59,5 +59,8 @@ public class BasicDataEntity {
 
     @Column
     private String accountNumber;
+
+    @OneToOne(mappedBy = "basicData")
+    private RequiredInformationEntity requiredInformation;
 }
 

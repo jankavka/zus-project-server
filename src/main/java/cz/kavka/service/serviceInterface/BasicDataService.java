@@ -1,4 +1,4 @@
-package cz.kavka.service;
+package cz.kavka.service.serviceInterface;
 
 import cz.kavka.dto.BasicDataDTO;
 

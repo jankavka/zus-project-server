@@ -11,6 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class NameAndContentDTO {
 
+    protected Long id;
+
     protected String title;
 
     protected String content;
