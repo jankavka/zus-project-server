@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface BasicDataMapper {
+
     BasicDataDTO toDTO (BasicDataEntity basicDataEntity);
 
     BasicDataEntity toEntity (BasicDataDTO basicDataDTO);

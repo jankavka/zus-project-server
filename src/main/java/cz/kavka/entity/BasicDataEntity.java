@@ -31,6 +31,17 @@ public class BasicDataEntity {
     @Column
     private String director;
 
+    private String telephoneNumbers;
+
+    private String webSite;
+
+    //zjistit jestli je třeba když je normální adresa
+    private String mailingAddress;
+
+    private String emailMailingAddress;
+
+    private String taxIdentificationNumber;
+
     @Column
     private String deputyDirector;
 
