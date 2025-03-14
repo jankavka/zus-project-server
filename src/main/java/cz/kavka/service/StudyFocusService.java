@@ -23,7 +23,7 @@ public class StudyFocusService implements NameAndContentService<StudyFocusDTO> {
 
     @Override
     public StudyFocusDTO create(StudyFocusDTO studyFocusDTO) {
-        studyFocusDTO.setId(1L);
+        //studyFocusDTO.setId(1L);
         StudyFocusEntity savedEntity = studyFocusRepository.save(studyFocusMapper.toEntity(studyFocusDTO));
         return studyFocusMapper.toDTO(savedEntity);
     }

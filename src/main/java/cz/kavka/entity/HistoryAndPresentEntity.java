@@ -4,7 +4,9 @@ import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
 public class HistoryAndPresentEntity extends NameAndContentEntity {
 

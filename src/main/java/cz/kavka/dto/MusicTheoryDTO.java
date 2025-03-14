@@ -3,6 +3,8 @@ package cz.kavka.dto;
 import cz.kavka.dto.dtosuperclass.NameAndContentDTO;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class MusicTheoryDTO extends NameAndContentDTO {
 }

@@ -3,9 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.HistoryAndPresentDTO;
 import cz.kavka.service.HistoryAndPresentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/history-and-present")
@@ -19,7 +17,7 @@ public class HistoryAndPresentController {
     }
 
     @PostMapping("/create")
-    public HistoryAndPresentDTO create (HistoryAndPresentDTO historyAndPresentDTO){
+    public HistoryAndPresentDTO create (@RequestBody HistoryAndPresentDTO historyAndPresentDTO){
         return historyAndPresentService.create(historyAndPresentDTO);
     }
 

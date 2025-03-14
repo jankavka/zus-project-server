@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class SchoolAchievementsDTO extends NameAndContentDTO {
 
     private List<String> schoolYears;

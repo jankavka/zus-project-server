@@ -3,9 +3,15 @@ package cz.kavka.entity.entitysuperclass;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
-public abstract class NameAndContentEntity {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class NameAndContentEntity {
 
     @Id
     protected Long id;
