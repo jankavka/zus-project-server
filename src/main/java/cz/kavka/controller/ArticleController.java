@@ -4,6 +4,7 @@ import cz.kavka.dto.ArticleDTO;
 import cz.kavka.service.serviceInterface.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class ArticleController {
     }
 
     @PostMapping("/create")
-    public ArticleDTO create(ArticleDTO articleDTO){
+    public ArticleDTO create(@RequestBody ArticleDTO articleDTO){
         return articleService.create(articleDTO);
     }
 }
