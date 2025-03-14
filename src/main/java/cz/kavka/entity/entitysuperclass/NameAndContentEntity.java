@@ -1,4 +1,4 @@
-package cz.kavka.entity.superclass;
+package cz.kavka.entity.entitysuperclass;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;

@@ -1,16 +1,12 @@
 package cz.kavka.entity;
 
-import cz.kavka.entity.superclass.NameAndContentEntity;
+import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Data
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class PersonalDataProtectionEntity extends NameAndContentEntity {
 }

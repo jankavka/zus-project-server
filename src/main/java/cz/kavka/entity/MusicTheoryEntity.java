@@ -4,7 +4,8 @@ import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
 import jakarta.persistence.Entity;
 import lombok.Data;
 
+
 @Data
 @Entity
-public class GroupTrainingScheduleEntity extends NameAndContentEntity {
+public class MusicTheoryEntity extends NameAndContentEntity {
 }

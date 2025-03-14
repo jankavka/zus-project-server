@@ -1,14 +1,8 @@
 package cz.kavka.dto;
 
-import cz.kavka.dto.superclass.NameAndContentDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import cz.kavka.dto.dtosuperclass.NameAndContentDTO;
+import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class PersonalDataProtectionDTO extends NameAndContentDTO {
 }

@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class BasicDataDTO {
 
-    private Long id;
+    private long id;
 
     private String schoolName;
 
@@ -44,5 +44,4 @@ public class BasicDataDTO {
 
     private String accountNumber;
 
-    private RequiredInformationDTO requiredInformation;
 }

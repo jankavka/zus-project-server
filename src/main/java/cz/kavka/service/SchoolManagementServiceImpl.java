@@ -1,0 +1,29 @@
+package cz.kavka.service;
+
+import cz.kavka.dto.SchoolManagementDTO;
+import cz.kavka.dto.mapper.SchoolManagementMapper;
+import cz.kavka.entity.SchoolManagementEntity;
+import cz.kavka.entity.repository.SchoolManagementRepository;
+import cz.kavka.service.serviceInterface.SchoolManagementService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class SchoolManagementServiceImpl implements SchoolManagementService {
+
+    private SchoolManagementMapper schoolManagementMapper;
+
+    private SchoolManagementRepository schoolManagementRepository;
+
+    @Autowired
+    public SchoolManagementServiceImpl(SchoolManagementRepository schoolManagementRepository, SchoolManagementMapper schoolManagementMapper) {
+        this.schoolManagementRepository = schoolManagementRepository;
+        this.schoolManagementMapper = schoolManagementMapper;
+    }
+
+    @Override
+    public SchoolManagementDTO create(SchoolManagementDTO schoolManagementDTO){
+        SchoolManagementEntity savedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
+        return schoolManagementMapper.toDTO(savedEntity);
+    }
+}

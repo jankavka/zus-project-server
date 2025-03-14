@@ -13,8 +13,6 @@ public class RequiredInformationDTO {
 
     private String contact;
 
-    private BasicDataDTO basicData;
-
     private String documents;
 
     private String submissionsAndSuggestions;

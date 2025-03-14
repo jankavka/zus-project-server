@@ -5,12 +5,12 @@ import lombok.Data;
 
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 public class BasicDataEntity {
 
     @Id
-    private final Long id;
+    private long id;
 
     @Column
     private String schoolName;
@@ -60,7 +60,5 @@ public class BasicDataEntity {
     @Column
     private String accountNumber;
 
-    @OneToOne(mappedBy = "basicData")
-    private RequiredInformationEntity requiredInformation;
 }
 
