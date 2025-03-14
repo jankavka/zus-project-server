@@ -23,7 +23,7 @@ public class MusicTheoryService implements NameAndContentService<MusicTheoryDTO>
 
     @Override
     public MusicTheoryDTO create(MusicTheoryDTO musicTheoryDTO) {
-        //musicTheoryDTO.setId(1L);
+        musicTheoryDTO.setId(1L);
         MusicTheoryEntity savedEntity = musicTheoryRepository.save(musicTheoryMapper.toEntity(musicTheoryDTO));
         return musicTheoryMapper.toDTO(savedEntity);
     }

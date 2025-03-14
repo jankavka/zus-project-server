@@ -23,7 +23,7 @@ public class SchoolFeeService implements NameAndContentService<SchoolFeeDTO> {
 
     @Override
     public SchoolFeeDTO create(SchoolFeeDTO schoolFeeDTO) {
-        //schoolFeeDTO.setId(1L);
+        schoolFeeDTO.setId(1L);
         SchoolFeeEntity savedEntity = schoolFeeRepository.save(schoolFeeMapper.toEntity(schoolFeeDTO));
         return schoolFeeMapper.toDTO(savedEntity);
     }

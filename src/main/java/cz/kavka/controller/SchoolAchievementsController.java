@@ -4,6 +4,7 @@ import cz.kavka.dto.SchoolAchievementsDTO;
 import cz.kavka.service.SchoolAchievementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class SchoolAchievementsController {
     }
 
     @PostMapping("/create")
-    public SchoolAchievementsDTO create (SchoolAchievementsDTO schoolAchievementsDTO){
+    public SchoolAchievementsDTO create (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
         return schoolAchievementsService.create(schoolAchievementsDTO);
     }
 }

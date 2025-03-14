@@ -23,7 +23,7 @@ public class BasicDataServiceImpl implements BasicDataService {
 
     @Override
     public BasicDataDTO create(BasicDataDTO basicDataDTO) {
-        //basicDataDTO.setId(1L);
+        basicDataDTO.setId(1L);
         BasicDataEntity savedEntity = basicDataRepository.save(basicDataMapper.toEntity(basicDataDTO));
         return basicDataMapper.toDTO(savedEntity);
     }

@@ -23,7 +23,7 @@ public class GroupTrainingScheduleService implements NameAndContentService<Group
 
     @Override
     public GroupTrainingScheduleDTO create(GroupTrainingScheduleDTO groupTrainingScheduleDTO) {
-        //groupTrainingScheduleDTO.setId(1L);
+        groupTrainingScheduleDTO.setId(1L);
         GroupTrainingScheduleEntity savedEntity = groupTrainingScheduleRepository.save(groupTrainingScheduleMapper.toEntity(groupTrainingScheduleDTO));
         return groupTrainingScheduleMapper.toDTO(savedEntity);
     }

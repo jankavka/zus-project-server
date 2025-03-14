@@ -23,7 +23,7 @@ public class PersonalDataProtectionService implements NameAndContentService<Pers
 
     @Override
     public PersonalDataProtectionDTO create(PersonalDataProtectionDTO personalDataProtectionDTO) {
-        //personalDataProtectionDTO.setId(1L);
+        personalDataProtectionDTO.setId(1L);
         PersonalDataProtectionEntity savedEntity = personalDataProtectionRepository.save(personalDataProtectionMapper.toEntity(personalDataProtectionDTO));
         return personalDataProtectionMapper.toDTO(savedEntity);
     }

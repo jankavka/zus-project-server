@@ -4,6 +4,7 @@ import cz.kavka.dto.StudyFocusDTO;
 import cz.kavka.service.StudyFocusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,7 @@ public class StudyFocusController {
     }
 
     @PostMapping("/create")
-    public StudyFocusDTO create (StudyFocusDTO studyFocusDTO){
+    public StudyFocusDTO create (@RequestBody StudyFocusDTO studyFocusDTO){
         return studyFocusService.create(studyFocusDTO);
     }
 }
