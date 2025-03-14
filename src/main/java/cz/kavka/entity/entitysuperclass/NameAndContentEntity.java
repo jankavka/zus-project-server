@@ -19,6 +19,6 @@ public class NameAndContentEntity {
     @Column
     protected String title;
 
-    @Column
+    @Column (columnDefinition = "TEXT")
     protected String content;
 }

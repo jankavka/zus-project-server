@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudyFocusService implements NameAndContentService<StudyFocusDTO> {
 
-    private StudyFocusRepository studyFocusRepository;
+    private final StudyFocusRepository studyFocusRepository;
 
-    private StudyFocusMapper studyFocusMapper;
+    private final StudyFocusMapper studyFocusMapper;
 
     @Autowired
     public StudyFocusService(StudyFocusRepository studyFocusRepository, StudyFocusMapper studyFocusMapper){

@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class GroupTrainingScheduleService implements NameAndContentService<GroupTrainingScheduleDTO> {
 
-    private GroupTrainingScheduleMapper groupTrainingScheduleMapper;
+    private final GroupTrainingScheduleMapper groupTrainingScheduleMapper;
 
-    private GroupTrainingScheduleRepository groupTrainingScheduleRepository;
+    private final GroupTrainingScheduleRepository groupTrainingScheduleRepository;
 
     @Autowired
     public GroupTrainingScheduleService(GroupTrainingScheduleMapper groupTrainingScheduleMapper, GroupTrainingScheduleRepository groupTrainingScheduleRepository) {

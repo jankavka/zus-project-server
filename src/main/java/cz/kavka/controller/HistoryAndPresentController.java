@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/history-and-present")
 public class HistoryAndPresentController {
 
-    HistoryAndPresentService historyAndPresentService;
+    private final HistoryAndPresentService historyAndPresentService;
 
     @Autowired
     public HistoryAndPresentController(HistoryAndPresentService historyAndPresentService){

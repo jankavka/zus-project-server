@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/basicData")
 public class BasicDataController {
 
-    private BasicDataService basicDataService;
+    private final BasicDataService basicDataService;
 
     @Autowired
     public BasicDataController(BasicDataService basicDataService){

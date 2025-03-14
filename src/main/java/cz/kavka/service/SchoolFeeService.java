@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolFeeService implements NameAndContentService<SchoolFeeDTO> {
 
-    private SchoolFeeMapper schoolFeeMapper;
+    private final SchoolFeeMapper schoolFeeMapper;
 
-    private SchoolFeeRepository schoolFeeRepository;
+    private final SchoolFeeRepository schoolFeeRepository;
 
     @Autowired
     public SchoolFeeService(SchoolFeeMapper schoolFeeMapper, SchoolFeeRepository schoolFeeRepository) {

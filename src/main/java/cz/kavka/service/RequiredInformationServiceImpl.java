@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RequiredInformationServiceImpl implements RequiredInformationService {
 
-    private RequiredInformationRepository requiredInformationRepository;
+    private final RequiredInformationRepository requiredInformationRepository;
 
-    private RequiredInformationMapper requiredInformationMapper;
+    private final RequiredInformationMapper requiredInformationMapper;
 
     @Autowired
     public RequiredInformationServiceImpl(RequiredInformationRepository requiredInformationRepository, RequiredInformationMapper requiredInformationMapper){

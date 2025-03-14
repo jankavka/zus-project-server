@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolManagementServiceImpl implements SchoolManagementService {
 
-    private SchoolManagementMapper schoolManagementMapper;
+    private final SchoolManagementMapper schoolManagementMapper;
 
-    private SchoolManagementRepository schoolManagementRepository;
+    private final SchoolManagementRepository schoolManagementRepository;
 
     @Autowired
     public SchoolManagementServiceImpl(SchoolManagementRepository schoolManagementRepository, SchoolManagementMapper schoolManagementMapper) {

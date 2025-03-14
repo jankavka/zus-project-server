@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/school-fee")
 public class SchoolFeeController {
 
-    private SchoolFeeService schoolFeeService;
+    private final SchoolFeeService schoolFeeService;
 
     @Autowired
     public SchoolFeeController(SchoolFeeService schoolFeeService) {

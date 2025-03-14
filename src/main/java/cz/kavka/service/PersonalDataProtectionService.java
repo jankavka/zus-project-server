@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PersonalDataProtectionService implements NameAndContentService<PersonalDataProtectionDTO> {
 
-    private PersonalDataProtectionMapper personalDataProtectionMapper;
+    private final PersonalDataProtectionMapper personalDataProtectionMapper;
 
-    private PersonalDataProtectionRepository personalDataProtectionRepository;
+    private final PersonalDataProtectionRepository personalDataProtectionRepository;
 
     @Autowired
     public PersonalDataProtectionService(PersonalDataProtectionMapper personalDataProtectionMapper, PersonalDataProtectionRepository personalDataProtectionRepository){

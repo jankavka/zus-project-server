@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/shool-achievements")
 public class SchoolAchievementsController {
 
-    private SchoolAchievementsService schoolAchievementsService;
+    private final SchoolAchievementsService schoolAchievementsService;
 
     @Autowired
     public SchoolAchievementsController(SchoolAchievementsService schoolAchievementsService){

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolAchievementsService implements NameAndContentService<SchoolAchievementsDTO> {
 
-    private SchoolAchievementsRepository schoolAchievementsRepository;
+    private final SchoolAchievementsRepository schoolAchievementsRepository;
 
     private SchoolAchievementsMapper schoolAchievementsMapper;
 

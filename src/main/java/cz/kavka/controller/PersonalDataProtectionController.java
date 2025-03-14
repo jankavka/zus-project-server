@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/personal-data-protection")
 public class PersonalDataProtectionController {
 
-    private PersonalDataProtectionService personalDataProtectionService;
+    private final PersonalDataProtectionService personalDataProtectionService;
 
     @Autowired
     public PersonalDataProtectionController(PersonalDataProtectionService personalDataProtectionService){

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/study-focus")
 public class StudyFocusController {
 
-    private StudyFocusService studyFocusService;
+    private final StudyFocusService studyFocusService;
 
     @Autowired
-    public StudyFocusController(StudyFocusService studyFocusService){
+    public StudyFocusController(StudyFocusService studyFocusService) {
         this.studyFocusService = studyFocusService;
     }
 
     @PostMapping("/create")
-    public StudyFocusDTO create (@RequestBody StudyFocusDTO studyFocusDTO){
+    public StudyFocusDTO create(@RequestBody StudyFocusDTO studyFocusDTO) {
         return studyFocusService.create(studyFocusDTO);
     }
 }

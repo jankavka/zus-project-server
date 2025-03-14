@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MusicTheoryService implements NameAndContentService<MusicTheoryDTO> {
 
-    private MusicTheoryMapper musicTheoryMapper;
+    private final MusicTheoryMapper musicTheoryMapper;
 
-    private MusicTheoryRepository musicTheoryRepository;
+    private final MusicTheoryRepository musicTheoryRepository;
 
     @Autowired
     public MusicTheoryService(MusicTheoryMapper musicTheoryMapper, MusicTheoryRepository musicTheoryRepository){

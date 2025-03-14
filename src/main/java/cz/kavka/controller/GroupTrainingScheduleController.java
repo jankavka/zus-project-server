@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/group-training-schedule")
 public class GroupTrainingScheduleController {
 
-    private GroupTrainingScheduleService groupTrainingScheduleService;
+    private final GroupTrainingScheduleService groupTrainingScheduleService;
 
     @Autowired
     public GroupTrainingScheduleController(GroupTrainingScheduleService groupTrainingScheduleService){

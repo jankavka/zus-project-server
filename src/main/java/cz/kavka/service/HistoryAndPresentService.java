@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class HistoryAndPresentService implements NameAndContentService<HistoryAndPresentDTO> {
 
-    private HistoryAndPresentMapper historyAndPresentMapper;
+    private final HistoryAndPresentMapper historyAndPresentMapper;
 
-    private HistoryAndPresentRepository historyAndPresentRepository;
+    private final HistoryAndPresentRepository historyAndPresentRepository;
 
     @Autowired
     public HistoryAndPresentService(HistoryAndPresentRepository historyAndPresentRepository, HistoryAndPresentMapper historyAndPresentMapper){
