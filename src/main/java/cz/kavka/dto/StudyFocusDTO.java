@@ -2,7 +2,6 @@ package cz.kavka.dto;
 
 import cz.kavka.dto.dtosuperclass.NameAndContentDTO;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

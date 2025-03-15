@@ -2,14 +2,10 @@ package cz.kavka.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
-@Entity
+@Entity(name = "required_information")
 public class RequiredInformationEntity {
 
     @Id

@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
+@Entity(name = "group_transition_schedule")
 public class GroupTrainingScheduleEntity extends NameAndContentEntity {
 }

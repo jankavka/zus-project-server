@@ -23,7 +23,7 @@ public class HistoryAndPresentService implements NameAndContentService<HistoryAn
 
     @Override
     public HistoryAndPresentDTO create(HistoryAndPresentDTO historyAndPresentDTO) {
-        historyAndPresentDTO.setId(1L);
+        //historyAndPresentDTO.setId(1L);
         HistoryAndPresentEntity savedEntity = historyAndPresentRepository.save(historyAndPresentMapper.toEntity(historyAndPresentDTO));
         return historyAndPresentMapper.toDTO(savedEntity);
     }

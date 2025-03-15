@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "school_fee")
 @Getter
 @Setter
 @AllArgsConstructor

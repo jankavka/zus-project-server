@@ -23,7 +23,7 @@ public class SchoolAchievementsService implements NameAndContentService<SchoolAc
 
     @Override
     public SchoolAchievementsDTO create(SchoolAchievementsDTO schoolAchievementsDTO) {
-        schoolAchievementsDTO.setId(1L);
+        //schoolAchievementsDTO.setId(1L);
         SchoolAchievementsEntity savedEntity = schoolAchievementsRepository.save(schoolAchievementsMapper.toEntity(schoolAchievementsDTO));
         return schoolAchievementsMapper.toDTO(savedEntity);
     }

@@ -1,21 +1,24 @@
 package cz.kavka.entity;
 
-import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@Entity(name = "article")
 @Getter
 @Setter
 @AllArgsConstructor
-public class ArticleEntity extends NameAndContentEntity {
+public class ArticleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
+
+    @Column
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
 }

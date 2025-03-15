@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 public class NameAndContentDTO {
 
-    protected Long id;
+    protected Long id = 1L;
 
     protected String title;
 

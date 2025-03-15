@@ -1,6 +1,5 @@
 package cz.kavka.dto.mapper;
 
-
 import cz.kavka.dto.TeachersDTO;
 import cz.kavka.entity.TeachersEntity;
 import org.mapstruct.Mapper;

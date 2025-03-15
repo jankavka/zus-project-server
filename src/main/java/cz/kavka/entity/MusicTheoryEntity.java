@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
+@Entity(name = "music_theory")
 public class MusicTheoryEntity extends NameAndContentEntity {
 }

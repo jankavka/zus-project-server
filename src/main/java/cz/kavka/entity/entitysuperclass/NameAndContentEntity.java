@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class NameAndContentEntity {
 
     @Id
-    protected Long id;
+    protected Long id = 1L;
 
     @Column
     protected String title;
 
-    @Column (columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     protected String content;
 }

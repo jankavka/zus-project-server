@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity
+@Entity(name = "history_and_present")
 public class HistoryAndPresentEntity extends NameAndContentEntity {
 
 
