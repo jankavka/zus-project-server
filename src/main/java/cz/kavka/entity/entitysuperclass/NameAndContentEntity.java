@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class NameAndContentEntity {
 
     @Id
-    protected Long id = 1L;
+    protected Long id;
 
     @Column
     protected String title;
