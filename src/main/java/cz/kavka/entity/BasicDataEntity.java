@@ -1,16 +1,21 @@
 package cz.kavka.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @Entity(name = "basic_data")
+@NoArgsConstructor
+@AllArgsConstructor
 public class BasicDataEntity {
 
     @Id
-    private long id;
+    private Long id;
 
     @Column
     private String schoolName;
@@ -59,6 +64,9 @@ public class BasicDataEntity {
 
     @Column
     private String accountNumber;
+
+    @Column
+    private LocalDate issuedDate = LocalDate.now();
 
 }
 

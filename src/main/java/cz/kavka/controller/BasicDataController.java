@@ -20,7 +20,7 @@ public class BasicDataController {
     }
 
     @PostMapping("/create")
-    public BasicDataDTO creataNewData(@RequestBody BasicDataDTO basicDataDTO){
+    public BasicDataDTO creatNewData(@RequestBody BasicDataDTO basicDataDTO){
         return basicDataService.create(basicDataDTO);
     }
 }

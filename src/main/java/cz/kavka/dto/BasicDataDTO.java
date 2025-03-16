@@ -2,12 +2,14 @@ package cz.kavka.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Data
 public class BasicDataDTO {
 
-    private long id;
+    private Long id = 1L;
 
     private String schoolName;
 
@@ -43,5 +45,7 @@ public class BasicDataDTO {
     private String dataBox;
 
     private String accountNumber;
+
+    private Date issuedDate;
 
 }

@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class TeachersDTO {
 
     private Long id;
@@ -18,4 +18,6 @@ public class TeachersDTO {
     private String email;
 
     private String telNumber;
+
+    private Date issuedDate;
 }

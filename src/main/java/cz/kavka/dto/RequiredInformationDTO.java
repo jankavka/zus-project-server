@@ -2,10 +2,12 @@ package cz.kavka.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Data
 public class RequiredInformationDTO {
 
-    private Long id;
+    private Long id = 1L;
 
     private String establishment;
 
@@ -24,6 +26,8 @@ public class RequiredInformationDTO {
     private String LicenseAgreements;
 
     private String annualReport;
+
+    private Date issuedDate;
 
 
 }

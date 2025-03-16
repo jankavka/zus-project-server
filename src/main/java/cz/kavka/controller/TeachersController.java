@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.TeachersDTO;
 import cz.kavka.service.serviceInterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ public class TeachersController {
         this.teachersService = teachersService;
     }
 
+    @PostMapping("/create")
     public TeachersDTO create (@RequestBody TeachersDTO teachersDTO){
         return teachersService.create(teachersDTO);
     }

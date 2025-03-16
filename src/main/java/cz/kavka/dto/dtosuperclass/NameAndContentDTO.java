@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,8 @@ public class NameAndContentDTO {
     protected String title;
 
     protected String content;
+
+    protected Date issuedDate;
 
 
 }

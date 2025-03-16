@@ -3,9 +3,13 @@ package cz.kavka.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity(name = "teachers")
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class TeachersEntity {
 
@@ -24,4 +28,7 @@ public class TeachersEntity {
 
     @Column
     private String telNumber;
+
+    @Column
+    private LocalDate issuedDate = LocalDate.now();
 }

@@ -3,13 +3,12 @@ package cz.kavka.controller;
 import cz.kavka.dto.ArticleDTO;
 import cz.kavka.service.serviceInterface.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/article")
+@RequestMapping("/api/articles")
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -23,4 +22,26 @@ public class ArticleController {
     public ArticleDTO create(@RequestBody ArticleDTO articleDTO){
         return articleService.create(articleDTO);
     }
+
+    @GetMapping
+    public List<ArticleDTO> showAll(){
+        return articleService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ArticleDTO show(@PathVariable Long id){
+        return articleService.getArticle(id);
+    }
+
+    @PutMapping("/edit/{id}")
+    public ArticleDTO edit(@RequestBody ArticleDTO articleDTO, @PathVariable Long id){
+        return articleService.edit(articleDTO, id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ArticleDTO remove (@PathVariable Long id){
+        return articleService.delete(id);
+    }
+
+
 }

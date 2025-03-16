@@ -1,13 +1,13 @@
 package cz.kavka.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity(name = "article")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class ArticleEntity {
 
@@ -20,5 +20,8 @@ public class ArticleEntity {
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column
+    private LocalDate issuedDate = LocalDate.now();
 
 }

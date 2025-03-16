@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @MappedSuperclass
 @Data
 @AllArgsConstructor
@@ -21,4 +23,7 @@ public class NameAndContentEntity {
 
     @Column(columnDefinition = "TEXT")
     protected String content;
+
+    @Column
+    protected LocalDate issuedDate = LocalDate.now();
 }
