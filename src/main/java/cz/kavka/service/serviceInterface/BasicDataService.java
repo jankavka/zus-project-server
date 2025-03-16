@@ -4,5 +4,6 @@ import cz.kavka.dto.BasicDataDTO;
 
 public interface BasicDataService {
 
-    public BasicDataDTO create (BasicDataDTO basicDataDTO);
+    BasicDataDTO createOrEdit (BasicDataDTO basicDataDTO);
+
 }

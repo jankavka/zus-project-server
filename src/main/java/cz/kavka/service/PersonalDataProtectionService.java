@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonalDataProtectionService implements NameAndContentService<PersonalDataProtectionDTO> {
+public class PersonalDataProtectionService implements NameAndContentService<PersonalDataProtectionDTO>{
 
     private final PersonalDataProtectionMapper personalDataProtectionMapper;
 
@@ -22,9 +22,9 @@ public class PersonalDataProtectionService implements NameAndContentService<Pers
     }
 
     @Override
-    public PersonalDataProtectionDTO create(PersonalDataProtectionDTO personalDataProtectionDTO) {
-        //personalDataProtectionDTO.setId(1L);
+    public PersonalDataProtectionDTO createOrEdit(PersonalDataProtectionDTO personalDataProtectionDTO) {
         PersonalDataProtectionEntity savedEntity = personalDataProtectionRepository.save(personalDataProtectionMapper.toEntity(personalDataProtectionDTO));
         return personalDataProtectionMapper.toDTO(savedEntity);
     }
+
 }

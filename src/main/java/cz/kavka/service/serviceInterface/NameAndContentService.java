@@ -1,6 +1,6 @@
 package cz.kavka.service.serviceInterface;
 
-public interface NameAndContentService<T> {
+public interface NameAndContentService<D>{
 
-    T create (T t);
+    D createOrEdit(D D);
 }

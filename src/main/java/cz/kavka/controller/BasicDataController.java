@@ -3,10 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.BasicDataDTO;
 import cz.kavka.service.serviceInterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/basicData")
@@ -20,7 +17,12 @@ public class BasicDataController {
     }
 
     @PostMapping("/create")
-    public BasicDataDTO creatNewData(@RequestBody BasicDataDTO basicDataDTO){
-        return basicDataService.create(basicDataDTO);
+    public BasicDataDTO create(@RequestBody BasicDataDTO basicDataDTO){
+        return basicDataService.createOrEdit(basicDataDTO);
+    }
+
+    @PutMapping("/edit")
+    public BasicDataDTO edit(@RequestBody BasicDataDTO basicDataDTO){
+        return basicDataService.createOrEdit(basicDataDTO);
     }
 }

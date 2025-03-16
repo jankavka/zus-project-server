@@ -22,8 +22,7 @@ public class RequiredInformationServiceImpl implements RequiredInformationServic
     }
 
     @Override
-    public RequiredInformationDTO create(RequiredInformationDTO requiredInformationDTO) {
-        //requiredInformationDTO.setId(1L);
+    public RequiredInformationDTO createOrEdit(RequiredInformationDTO requiredInformationDTO) {
         RequiredInformationEntity savedEntity = requiredInformationRepository.save(requiredInformationMapper.toEntity(requiredInformationDTO));
         return requiredInformationMapper.toDTO(savedEntity);
     }

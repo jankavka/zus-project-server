@@ -16,15 +16,15 @@ public class StudyFocusService implements NameAndContentService<StudyFocusDTO> {
     private final StudyFocusMapper studyFocusMapper;
 
     @Autowired
-    public StudyFocusService(StudyFocusRepository studyFocusRepository, StudyFocusMapper studyFocusMapper){
+    public StudyFocusService(StudyFocusRepository studyFocusRepository, StudyFocusMapper studyFocusMapper) {
         this.studyFocusMapper = studyFocusMapper;
         this.studyFocusRepository = studyFocusRepository;
     }
 
     @Override
-    public StudyFocusDTO create(StudyFocusDTO studyFocusDTO) {
-        //studyFocusDTO.setId(1L);
+    public StudyFocusDTO createOrEdit(StudyFocusDTO studyFocusDTO) {
         StudyFocusEntity savedEntity = studyFocusRepository.save(studyFocusMapper.toEntity(studyFocusDTO));
         return studyFocusMapper.toDTO(savedEntity);
     }
+
 }

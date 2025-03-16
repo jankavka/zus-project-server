@@ -3,10 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.PersonalDataProtectionDTO;
 import cz.kavka.service.PersonalDataProtectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/personal-data-protection")
@@ -21,6 +18,11 @@ public class PersonalDataProtectionController {
 
     @PostMapping("/create")
     public PersonalDataProtectionDTO create (@RequestBody PersonalDataProtectionDTO personalDataProtectionDTO){
-        return personalDataProtectionService.create(personalDataProtectionDTO);
+        return personalDataProtectionService.createOrEdit(personalDataProtectionDTO);
+    }
+
+    @PutMapping("/edit")
+    public PersonalDataProtectionDTO edit (@RequestBody PersonalDataProtectionDTO personalDataProtectionDTO){
+        return personalDataProtectionService.createOrEdit(personalDataProtectionDTO);
     }
 }

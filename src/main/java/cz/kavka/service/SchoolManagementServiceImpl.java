@@ -26,4 +26,11 @@ public class SchoolManagementServiceImpl implements SchoolManagementService {
         SchoolManagementEntity savedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
         return schoolManagementMapper.toDTO(savedEntity);
     }
+
+    @Override
+    public SchoolManagementDTO edit(SchoolManagementDTO schoolManagementDTO, Long id) {
+        schoolManagementDTO.setId(id);
+        SchoolManagementEntity editedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
+        return schoolManagementMapper.toDTO(editedEntity);
+    }
 }

@@ -12,13 +12,18 @@ public class HistoryAndPresentController {
     private final HistoryAndPresentService historyAndPresentService;
 
     @Autowired
-    public HistoryAndPresentController(HistoryAndPresentService historyAndPresentService){
+    public HistoryAndPresentController(HistoryAndPresentService historyAndPresentService) {
         this.historyAndPresentService = historyAndPresentService;
     }
 
     @PostMapping("/create")
-    public HistoryAndPresentDTO create (@RequestBody HistoryAndPresentDTO historyAndPresentDTO){
-        return historyAndPresentService.create(historyAndPresentDTO);
+    public HistoryAndPresentDTO create(@RequestBody HistoryAndPresentDTO historyAndPresentDTO) {
+        return historyAndPresentService.createOrEdit(historyAndPresentDTO);
+    }
+
+    @PutMapping("/edit")
+    public HistoryAndPresentDTO edit(@RequestBody HistoryAndPresentDTO historyAndPresentDTO) {
+        return historyAndPresentService.createOrEdit(historyAndPresentDTO);
     }
 
 }

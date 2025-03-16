@@ -26,4 +26,11 @@ public class TeachersServiceImpl implements TeachersService {
         TeachersEntity savedEntity = teachersRepository.save(teachersMapper.toEntity(teachersDTO));
         return teachersMapper.toDTO(savedEntity);
     }
+
+    @Override
+    public TeachersDTO edit(TeachersDTO teachersDTO, Long id) {
+        teachersDTO.setId(id);
+        TeachersEntity editedEntity = teachersRepository.save(teachersMapper.toEntity(teachersDTO));
+        return teachersMapper.toDTO(editedEntity);
+    }
 }
