@@ -4,7 +4,8 @@ import cz.kavka.dto.SchoolFeeDTO;
 import cz.kavka.dto.mapper.SchoolFeeMapper;
 import cz.kavka.entity.SchoolFeeEntity;
 import cz.kavka.entity.repository.SchoolFeeRepository;
-import cz.kavka.service.serviceInterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.NameAndContentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class SchoolFeeService implements NameAndContentService<SchoolFeeDTO> {
     public SchoolFeeDTO createOrEdit(SchoolFeeDTO schoolFeeDTO) {
         SchoolFeeEntity savedEntity = schoolFeeRepository.save(schoolFeeMapper.toEntity(schoolFeeDTO));
         return schoolFeeMapper.toDTO(savedEntity);
+    }
+
+    @Override
+    public SchoolFeeDTO get(SchoolFeeDTO schoolFeeDTO) {
+        return schoolFeeMapper.toDTO(schoolFeeRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 
 }

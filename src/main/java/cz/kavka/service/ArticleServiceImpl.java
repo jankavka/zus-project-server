@@ -4,14 +4,15 @@ import cz.kavka.dto.ArticleDTO;
 import cz.kavka.dto.mapper.ArticleMapper;
 import cz.kavka.entity.ArticleEntity;
 import cz.kavka.entity.repository.ArticleRepository;
-import cz.kavka.service.serviceInterface.ArticleService;
+import cz.kavka.service.serviceinterface.ArticleService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
@@ -26,7 +27,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO create(ArticleDTO articleDTO) {
+    public ArticleDTO createArticle(ArticleDTO articleDTO) {
         ArticleEntity savedEntity = articleRepository.save(articleMapper.toEntity(articleDTO));
         return articleMapper.toDTO(savedEntity);
     }
@@ -42,20 +43,21 @@ public class ArticleServiceImpl implements ArticleService {
         try {
             articleEntity = articleRepository.getReferenceById(id);
         } catch (RuntimeException e) {
-            throw new EntityNotFoundException("Článek nenalazen");
+            log.warn("Article with id {} wasn't found", id);
+            throw new EntityNotFoundException("Article not found");
         }
         return articleMapper.toDTO(articleEntity);
     }
 
     @Override
-    public ArticleDTO edit(ArticleDTO articleDTO, Long id) {
+    public ArticleDTO editArticle(ArticleDTO articleDTO, Long id) {
         articleDTO.setId(id);
         ArticleEntity savedEntity = articleRepository.save(articleMapper.toEntity(articleDTO));
         return articleMapper.toDTO(savedEntity);
     }
 
     @Override
-    public ArticleDTO delete(Long id) {
+    public ArticleDTO deleteArticle(Long id) {
         ArticleEntity articleEntity = articleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ArticleDTO deletedArticle = articleMapper.toDTO(articleEntity);
         articleRepository.delete(articleEntity);

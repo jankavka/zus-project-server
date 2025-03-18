@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * Superclass which is extended by other classes with the same attributes.
+ */
 @MappedSuperclass
 @Data
 @AllArgsConstructor

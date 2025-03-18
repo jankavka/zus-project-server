@@ -1,9 +1,11 @@
-package cz.kavka.service.serviceInterface;
+package cz.kavka.service.serviceinterface;
 
 import cz.kavka.dto.RequiredInformationDTO;
 
 public interface RequiredInformationService {
 
     RequiredInformationDTO createOrEdit(RequiredInformationDTO requiredInformationDTO);
+
+    RequiredInformationDTO get(RequiredInformationDTO requiredInformationDTO);
 
 }

@@ -1,19 +1,22 @@
 package cz.kavka.entity;
 
 import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Entity(name = "school_achievements")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SchoolAchievementsEntity extends NameAndContentEntity {
 
-    @ElementCollection
-    private List<String> schoolYears;
+    @ManyToOne
+    @JoinColumn(name = "school_year")
+    private SchoolYearEntity schoolYear;
 }

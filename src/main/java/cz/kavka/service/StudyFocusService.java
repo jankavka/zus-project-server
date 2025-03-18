@@ -4,7 +4,8 @@ import cz.kavka.dto.StudyFocusDTO;
 import cz.kavka.dto.mapper.StudyFocusMapper;
 import cz.kavka.entity.StudyFocusEntity;
 import cz.kavka.entity.repository.StudyFocusRepository;
-import cz.kavka.service.serviceInterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.NameAndContentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class StudyFocusService implements NameAndContentService<StudyFocusDTO> {
     public StudyFocusDTO createOrEdit(StudyFocusDTO studyFocusDTO) {
         StudyFocusEntity savedEntity = studyFocusRepository.save(studyFocusMapper.toEntity(studyFocusDTO));
         return studyFocusMapper.toDTO(savedEntity);
+    }
+
+    @Override
+    public StudyFocusDTO get(StudyFocusDTO studyFocusDTO) {
+        return studyFocusMapper.toDTO(studyFocusRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 
 }

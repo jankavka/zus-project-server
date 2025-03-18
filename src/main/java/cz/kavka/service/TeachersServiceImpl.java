@@ -4,7 +4,7 @@ import cz.kavka.dto.TeachersDTO;
 import cz.kavka.dto.mapper.TeachersMapper;
 import cz.kavka.entity.TeachersEntity;
 import cz.kavka.entity.repository.TeachersRepository;
-import cz.kavka.service.serviceInterface.TeachersService;
+import cz.kavka.service.serviceinterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +32,10 @@ public class TeachersServiceImpl implements TeachersService {
         teachersDTO.setId(id);
         TeachersEntity editedEntity = teachersRepository.save(teachersMapper.toEntity(teachersDTO));
         return teachersMapper.toDTO(editedEntity);
+    }
+
+    @Override
+    public TeachersDTO get(TeachersDTO teachersDTO, Long id) {
+        return teachersMapper.toDTO(teachersRepository.getReferenceById(id));
     }
 }

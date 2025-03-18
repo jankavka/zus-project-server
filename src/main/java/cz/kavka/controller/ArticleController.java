@@ -1,7 +1,7 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.ArticleDTO;
-import cz.kavka.service.serviceInterface.ArticleService;
+import cz.kavka.service.serviceinterface.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class ArticleController {
 
     @PostMapping("/create")
     public ArticleDTO create(@RequestBody ArticleDTO articleDTO){
-        return articleService.create(articleDTO);
+        return articleService.createArticle(articleDTO);
     }
 
     @GetMapping
@@ -35,12 +35,12 @@ public class ArticleController {
 
     @PutMapping("/edit/{id}")
     public ArticleDTO edit(@RequestBody ArticleDTO articleDTO, @PathVariable Long id){
-        return articleService.edit(articleDTO, id);
+        return articleService.editArticle(articleDTO, id);
     }
 
     @DeleteMapping("/delete/{id}")
     public ArticleDTO remove (@PathVariable Long id){
-        return articleService.delete(id);
+        return articleService.deleteArticle(id);
     }
 
 

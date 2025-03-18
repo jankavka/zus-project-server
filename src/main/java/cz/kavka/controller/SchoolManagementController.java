@@ -1,7 +1,7 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.SchoolManagementDTO;
-import cz.kavka.service.serviceInterface.SchoolManagementService;
+import cz.kavka.service.serviceinterface.SchoolManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

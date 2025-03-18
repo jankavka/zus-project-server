@@ -1,7 +1,7 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.BasicDataDTO;
-import cz.kavka.service.serviceInterface.BasicDataService;
+import cz.kavka.service.serviceinterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

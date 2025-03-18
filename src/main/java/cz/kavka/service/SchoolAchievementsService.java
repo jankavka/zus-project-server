@@ -4,7 +4,8 @@ import cz.kavka.dto.SchoolAchievementsDTO;
 import cz.kavka.dto.mapper.SchoolAchievementsMapper;
 import cz.kavka.entity.SchoolAchievementsEntity;
 import cz.kavka.entity.repository.SchoolAchievementsRepository;
-import cz.kavka.service.serviceInterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.NameAndContentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,11 @@ public class SchoolAchievementsService implements NameAndContentService<SchoolAc
     public SchoolAchievementsDTO createOrEdit(SchoolAchievementsDTO schoolAchievementsDTO) {
         SchoolAchievementsEntity savedEntity = schoolAchievementsRepository.save(schoolAchievementsMapper.toEntity(schoolAchievementsDTO));
         return schoolAchievementsMapper.toDTO(savedEntity);
+    }
+
+    @Override
+    public SchoolAchievementsDTO get(SchoolAchievementsDTO schoolAchievementsDTO) {
+        return schoolAchievementsMapper.toDTO(schoolAchievementsRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 
 }
