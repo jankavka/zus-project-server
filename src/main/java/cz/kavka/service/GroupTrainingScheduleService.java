@@ -4,13 +4,13 @@ import cz.kavka.dto.GroupTrainingScheduleDTO;
 import cz.kavka.dto.mapper.GroupTrainingScheduleMapper;
 import cz.kavka.entity.GroupTrainingScheduleEntity;
 import cz.kavka.entity.repository.GroupTrainingScheduleRepository;
-import cz.kavka.service.serviceinterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.TitleAndContentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GroupTrainingScheduleService implements NameAndContentService<GroupTrainingScheduleDTO> {
+public class GroupTrainingScheduleService implements TitleAndContentService<GroupTrainingScheduleDTO> {
 
     private final GroupTrainingScheduleMapper groupTrainingScheduleMapper;
 
@@ -29,7 +29,7 @@ public class GroupTrainingScheduleService implements NameAndContentService<Group
     }
 
     @Override
-    public GroupTrainingScheduleDTO get(GroupTrainingScheduleDTO groupTrainingScheduleDTO) {
+    public GroupTrainingScheduleDTO get() {
         return groupTrainingScheduleMapper.toDTO(groupTrainingScheduleRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 

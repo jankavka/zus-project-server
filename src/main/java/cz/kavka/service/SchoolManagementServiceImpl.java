@@ -22,20 +22,20 @@ public class SchoolManagementServiceImpl implements SchoolManagementService {
     }
 
     @Override
-    public SchoolManagementDTO create(SchoolManagementDTO schoolManagementDTO){
+    public SchoolManagementDTO createMember(SchoolManagementDTO schoolManagementDTO){
         SchoolManagementEntity savedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
         return schoolManagementMapper.toDTO(savedEntity);
     }
 
     @Override
-    public SchoolManagementDTO edit(SchoolManagementDTO schoolManagementDTO, Long id) {
+    public SchoolManagementDTO editMember(SchoolManagementDTO schoolManagementDTO, Long id) {
         schoolManagementDTO.setId(id);
         SchoolManagementEntity editedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
         return schoolManagementMapper.toDTO(editedEntity);
     }
 
     @Override
-    public SchoolManagementDTO get(SchoolManagementDTO schoolManagementDTO, Long id) {
+    public SchoolManagementDTO getMember(Long id) {
         return schoolManagementMapper.toDTO(schoolManagementRepository.getReferenceById(id));
     }
 }

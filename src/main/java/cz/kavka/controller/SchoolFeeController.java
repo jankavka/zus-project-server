@@ -25,4 +25,9 @@ public class SchoolFeeController {
     public SchoolFeeDTO edit(@RequestBody SchoolFeeDTO schoolFeeDTO) {
         return schoolFeeService.createOrEdit(schoolFeeDTO);
     }
+
+    @GetMapping
+    public SchoolFeeDTO showSchoolFee(){
+        return schoolFeeService.get();
+    }
 }

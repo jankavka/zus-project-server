@@ -3,10 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.MusicTheoryDTO;
 import cz.kavka.service.MusicTheoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("/api/music-theory")
 public class MusicTheoryController {
@@ -26,6 +23,11 @@ public class MusicTheoryController {
     @PutMapping("/edit")
     public MusicTheoryDTO edit (@RequestBody MusicTheoryDTO musicTheoryDTO){
         return musicTheoryService.createOrEdit(musicTheoryDTO);
+    }
+
+    @GetMapping
+    public MusicTheoryDTO showMusicTheory(){
+        return musicTheoryService.get();
     }
 
 }

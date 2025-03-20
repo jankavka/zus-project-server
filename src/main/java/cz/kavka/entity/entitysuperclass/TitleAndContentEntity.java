@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 /**
- * Superclass which is extended by other classes with the same attributes.
+ * Entity superclass which is extended by other classes inheriting attributes from this class.
  */
 @MappedSuperclass
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class NameAndContentEntity {
+public class TitleAndContentEntity {
 
     @Id
     protected Long id;

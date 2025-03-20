@@ -29,7 +29,7 @@ public class BasicDataServiceImpl implements BasicDataService {
     }
 
     @Override
-    public BasicDataDTO get(BasicDataDTO basicDataDTO) {
+    public BasicDataDTO get() {
         return basicDataMapper.toDTO(basicDataRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 

@@ -25,4 +25,9 @@ public class TeachersController {
     public TeachersDTO edit(@RequestBody TeachersDTO teachersDTO, @PathVariable Long id){
         return teachersService.edit(teachersDTO,id);
     }
+
+    @GetMapping
+    public TeachersDTO showTeacher(Long id){
+        return teachersService.get(id);
+    }
 }

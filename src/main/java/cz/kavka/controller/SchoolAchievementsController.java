@@ -25,4 +25,9 @@ public class SchoolAchievementsController {
     public SchoolAchievementsDTO edit (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
         return schoolAchievementsService.createOrEdit(schoolAchievementsDTO);
     }
+
+    @GetMapping
+    public SchoolAchievementsDTO showSchoolAchievements(){
+        return schoolAchievementsService.get();
+    }
 }

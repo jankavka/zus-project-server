@@ -1,6 +1,6 @@
 package cz.kavka.entity;
 
-import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
+import cz.kavka.entity.entitysuperclass.TitleAndContentEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity(name = "school_achievements")
 @AllArgsConstructor
 @NoArgsConstructor
-public class SchoolAchievementsEntity extends NameAndContentEntity {
+public class SchoolAchievementsEntity extends TitleAndContentEntity {
 
     @ManyToOne
     @JoinColumn(name = "school_year")

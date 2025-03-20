@@ -4,13 +4,13 @@ import cz.kavka.dto.HistoryAndPresentDTO;
 import cz.kavka.dto.mapper.HistoryAndPresentMapper;
 import cz.kavka.entity.HistoryAndPresentEntity;
 import cz.kavka.entity.repository.HistoryAndPresentRepository;
-import cz.kavka.service.serviceinterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.TitleAndContentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HistoryAndPresentService implements NameAndContentService<HistoryAndPresentDTO> {
+public class HistoryAndPresentService implements TitleAndContentService<HistoryAndPresentDTO> {
 
     private final HistoryAndPresentMapper historyAndPresentMapper;
 
@@ -29,7 +29,7 @@ public class HistoryAndPresentService implements NameAndContentService<HistoryAn
     }
 
     @Override
-    public HistoryAndPresentDTO get(HistoryAndPresentDTO historyAndPresentDTO) {
+    public HistoryAndPresentDTO get() {
         return historyAndPresentMapper.toDTO(historyAndPresentRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 

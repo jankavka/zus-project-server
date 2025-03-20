@@ -26,4 +26,9 @@ public class GroupTrainingScheduleController {
         return groupTrainingScheduleService.createOrEdit(groupTrainingScheduleDTO);
     }
 
+    @GetMapping
+    public GroupTrainingScheduleDTO showSchedule(){
+        return groupTrainingScheduleService.get();
+    }
+
 }

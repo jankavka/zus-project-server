@@ -26,4 +26,9 @@ public class HistoryAndPresentController {
         return historyAndPresentService.createOrEdit(historyAndPresentDTO);
     }
 
+    @GetMapping
+    public HistoryAndPresentDTO showHistoryAndPresent(){
+        return historyAndPresentService.get();
+    }
+
 }

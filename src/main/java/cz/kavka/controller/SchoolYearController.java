@@ -1,12 +1,10 @@
 package cz.kavka.controller;
 
+import cz.kavka.dto.SchoolFeeDTO;
 import cz.kavka.dto.SchoolYearDTO;
 import cz.kavka.service.serviceinterface.SchoolYearService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/school-year")
@@ -22,5 +20,10 @@ public class SchoolYearController {
     @PostMapping("/create")
     public SchoolYearDTO create(@RequestBody SchoolYearDTO schoolYearDTO){
         return schoolYearService.create(schoolYearDTO);
+    }
+
+    @GetMapping
+    public SchoolYearDTO showSchoolYear(Long id){
+        return schoolYearService.get(id);
     }
 }

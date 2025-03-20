@@ -25,4 +25,9 @@ public class StudyFocusController {
     public StudyFocusDTO edit(@RequestBody StudyFocusDTO studyFocusDTO) {
         return studyFocusService.createOrEdit(studyFocusDTO);
     }
+
+    @GetMapping
+    public StudyFocusDTO showStudyFocus(){
+        return studyFocusService.get();
+    }
 }

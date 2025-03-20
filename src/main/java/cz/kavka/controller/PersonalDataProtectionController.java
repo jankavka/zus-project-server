@@ -25,4 +25,9 @@ public class PersonalDataProtectionController {
     public PersonalDataProtectionDTO edit (@RequestBody PersonalDataProtectionDTO personalDataProtectionDTO){
         return personalDataProtectionService.createOrEdit(personalDataProtectionDTO);
     }
+
+    @GetMapping
+    public PersonalDataProtectionDTO showPersonalDataProtection(){
+        return personalDataProtectionService.get();
+    }
 }

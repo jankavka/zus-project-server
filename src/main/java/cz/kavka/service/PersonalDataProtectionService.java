@@ -4,13 +4,13 @@ import cz.kavka.dto.PersonalDataProtectionDTO;
 import cz.kavka.dto.mapper.PersonalDataProtectionMapper;
 import cz.kavka.entity.PersonalDataProtectionEntity;
 import cz.kavka.entity.repository.PersonalDataProtectionRepository;
-import cz.kavka.service.serviceinterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.TitleAndContentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PersonalDataProtectionService implements NameAndContentService<PersonalDataProtectionDTO>{
+public class PersonalDataProtectionService implements TitleAndContentService<PersonalDataProtectionDTO> {
 
     private final PersonalDataProtectionMapper personalDataProtectionMapper;
 
@@ -29,7 +29,7 @@ public class PersonalDataProtectionService implements NameAndContentService<Pers
     }
 
     @Override
-    public PersonalDataProtectionDTO get(PersonalDataProtectionDTO personalDataProtectionDTO) {
+    public PersonalDataProtectionDTO get() {
         return personalDataProtectionMapper.toDTO(personalDataProtectionRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 

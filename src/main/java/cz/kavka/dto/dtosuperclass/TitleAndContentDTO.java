@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
-public class NameAndContentDTO {
+public class TitleAndContentDTO {
 
     protected Long id = 1L;
 

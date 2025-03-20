@@ -6,6 +6,6 @@ public interface RequiredInformationService {
 
     RequiredInformationDTO createOrEdit(RequiredInformationDTO requiredInformationDTO);
 
-    RequiredInformationDTO get(RequiredInformationDTO requiredInformationDTO);
+    RequiredInformationDTO get();
 
 }

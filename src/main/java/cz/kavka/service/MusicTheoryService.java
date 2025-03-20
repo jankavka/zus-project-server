@@ -4,13 +4,13 @@ import cz.kavka.dto.MusicTheoryDTO;
 import cz.kavka.dto.mapper.MusicTheoryMapper;
 import cz.kavka.entity.MusicTheoryEntity;
 import cz.kavka.entity.repository.MusicTheoryRepository;
-import cz.kavka.service.serviceinterface.NameAndContentService;
+import cz.kavka.service.serviceinterface.TitleAndContentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MusicTheoryService implements NameAndContentService<MusicTheoryDTO> {
+public class MusicTheoryService implements TitleAndContentService<MusicTheoryDTO> {
 
     private final MusicTheoryMapper musicTheoryMapper;
 
@@ -29,7 +29,7 @@ public class MusicTheoryService implements NameAndContentService<MusicTheoryDTO>
     }
 
     @Override
-    public MusicTheoryDTO get(MusicTheoryDTO musicTheoryDTO) {
+    public MusicTheoryDTO get() {
         return musicTheoryMapper.toDTO(musicTheoryRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 

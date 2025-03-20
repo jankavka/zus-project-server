@@ -29,7 +29,7 @@ public class RequiredInformationServiceImpl implements RequiredInformationServic
     }
 
     @Override
-    public RequiredInformationDTO get(RequiredInformationDTO requiredInformationDTO) {
+    public RequiredInformationDTO get() {
         return requiredInformationMapper.toDTO(requiredInformationRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
     }
 }

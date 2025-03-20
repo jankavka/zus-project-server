@@ -8,5 +8,5 @@ public interface TeachersService {
 
     TeachersDTO edit (TeachersDTO teachersDTO, Long id);
 
-    TeachersDTO get (TeachersDTO teachersDTO, Long id);
+    TeachersDTO get (Long id);
 }

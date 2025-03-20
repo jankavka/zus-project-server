@@ -17,12 +17,18 @@ public class BasicDataController {
     }
 
     @PostMapping("/create")
-    public BasicDataDTO create(@RequestBody BasicDataDTO basicDataDTO){
+    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO){
         return basicDataService.createOrEdit(basicDataDTO);
     }
 
     @PutMapping("/edit")
-    public BasicDataDTO edit(@RequestBody BasicDataDTO basicDataDTO){
+    public BasicDataDTO editData(@RequestBody BasicDataDTO basicDataDTO){
         return basicDataService.createOrEdit(basicDataDTO);
     }
+
+    @GetMapping
+    public BasicDataDTO showData(){
+        return basicDataService.get();
+    }
+
 }

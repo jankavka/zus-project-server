@@ -1,6 +1,6 @@
 package cz.kavka.dto;
 
-import cz.kavka.dto.dtosuperclass.NameAndContentDTO;
+import cz.kavka.dto.dtosuperclass.TitleAndContentDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +8,5 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class StudyFocusDTO extends NameAndContentDTO {
+public class StudyFocusDTO extends TitleAndContentDTO {
 }

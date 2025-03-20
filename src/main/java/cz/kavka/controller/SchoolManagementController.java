@@ -18,7 +18,12 @@ public class SchoolManagementController {
 
     @PostMapping("/create")
     public SchoolManagementDTO create(@RequestBody SchoolManagementDTO schoolManagementDTO){
-        return schoolManagementService.create(schoolManagementDTO);
+        return schoolManagementService.createMember(schoolManagementDTO);
+    }
+
+    @GetMapping
+    public SchoolManagementDTO showSchoolManagement(Long id){
+        return schoolManagementService.getMember(id);
     }
 
 }

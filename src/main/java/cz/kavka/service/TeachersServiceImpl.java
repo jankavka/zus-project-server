@@ -35,7 +35,7 @@ public class TeachersServiceImpl implements TeachersService {
     }
 
     @Override
-    public TeachersDTO get(TeachersDTO teachersDTO, Long id) {
+    public TeachersDTO get(Long id) {
         return teachersMapper.toDTO(teachersRepository.getReferenceById(id));
     }
 }

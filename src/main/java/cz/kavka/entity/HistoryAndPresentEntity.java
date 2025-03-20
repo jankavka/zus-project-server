@@ -1,6 +1,6 @@
 package cz.kavka.entity;
 
-import cz.kavka.entity.entitysuperclass.NameAndContentEntity;
+import cz.kavka.entity.entitysuperclass.TitleAndContentEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @Entity(name = "history_and_present")
-public class HistoryAndPresentEntity extends NameAndContentEntity {
+public class HistoryAndPresentEntity extends TitleAndContentEntity {
 
 
 }

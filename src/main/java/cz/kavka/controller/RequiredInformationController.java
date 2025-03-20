@@ -25,4 +25,9 @@ public class RequiredInformationController {
     public RequiredInformationDTO edit(@RequestBody RequiredInformationDTO requiredInformationDTO) {
         return requiredInformationService.createOrEdit(requiredInformationDTO);
     }
+
+    @GetMapping
+    public RequiredInformationDTO showRequiredInfo(){
+        return requiredInformationService.get();
+    }
 }
