@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class SchoolYearServiceImpl implements SchoolYearService {
 
-    private SchoolYearMapper schoolYearMapper;
+    private final SchoolYearMapper schoolYearMapper;
 
-    private SchoolYearRepository schoolYearRepository;
+    private final SchoolYearRepository schoolYearRepository;
 
     @Autowired
     public SchoolYearServiceImpl(SchoolYearMapper schoolYearMapper, SchoolYearRepository schoolYearRepository) {

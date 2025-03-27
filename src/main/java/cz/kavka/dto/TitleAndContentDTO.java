@@ -1,4 +1,4 @@
-package cz.kavka.dto.dtosuperclass;
+package cz.kavka.dto;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.Date;
 @MappedSuperclass
 public class TitleAndContentDTO {
 
-    protected Long id = 1L;
+    //protected Long id = 1L;
 
     protected String title;
 

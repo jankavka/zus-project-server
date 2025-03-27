@@ -1,13 +1,16 @@
 package cz.kavka.service.serviceinterface;
 
-/**
- * Creates or edits a record in database. Main principle is that there will be always one record in specific
- * database table (Long id = 1L) serviced by classes which implements NameAndContent.
- * @param <D> An DTO object with data of new object
- */
-public interface TitleAndContentService<D>{
+import cz.kavka.dto.TitleAndContentDTO;
 
-    D createOrEdit(D D);
+import java.io.IOException;
+import java.util.Map;
+import java.util.Optional;
 
-    D get ();
+public interface TitleAndContentService {
+
+    Map<String, TitleAndContentDTO> getContent() throws IOException;
+
+    Optional<TitleAndContentDTO> getSection(String key) throws IOException;
+
+    Map<String, TitleAndContentDTO> updateContent(String key, TitleAndContentDTO titleAndContentDTO) throws IOException;
 }

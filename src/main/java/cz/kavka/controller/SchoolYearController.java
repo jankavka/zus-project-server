@@ -1,6 +1,5 @@
 package cz.kavka.controller;
 
-import cz.kavka.dto.SchoolFeeDTO;
 import cz.kavka.dto.SchoolYearDTO;
 import cz.kavka.service.serviceinterface.SchoolYearService;
 import org.springframework.beans.factory.annotation.Autowired;

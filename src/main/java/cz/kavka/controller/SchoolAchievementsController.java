@@ -1,33 +1,45 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.SchoolAchievementsDTO;
-import cz.kavka.service.SchoolAchievementsService;
+import cz.kavka.service.SchoolAchievementsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/school-achievements")
 public class SchoolAchievementsController {
 
-    private final SchoolAchievementsService schoolAchievementsService;
+    private final SchoolAchievementsServiceImpl schoolAchievementsService;
 
     @Autowired
-    public SchoolAchievementsController(SchoolAchievementsService schoolAchievementsService){
+    public SchoolAchievementsController(SchoolAchievementsServiceImpl schoolAchievementsService){
         this.schoolAchievementsService = schoolAchievementsService;
     }
 
     @PostMapping("/create")
-    public SchoolAchievementsDTO create (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
-        return schoolAchievementsService.createOrEdit(schoolAchievementsDTO);
+    public SchoolAchievementsDTO createAchievement (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
+        return schoolAchievementsService.createAchievement(schoolAchievementsDTO);
     }
 
-    @PutMapping("/edit")
-    public SchoolAchievementsDTO edit (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
-        return schoolAchievementsService.createOrEdit(schoolAchievementsDTO);
+    @PutMapping("/edit/{id}")
+    public SchoolAchievementsDTO editAchievement (@PathVariable Long id, @RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
+        return schoolAchievementsService.updateAchievement(id, schoolAchievementsDTO);
     }
 
     @GetMapping
-    public SchoolAchievementsDTO showSchoolAchievements(){
-        return schoolAchievementsService.get();
+    public List<SchoolAchievementsDTO> showAllSchoolAchievements(){
+        return schoolAchievementsService.getAllAchievements();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public SchoolAchievementsDTO deleteAchievement (@PathVariable Long id){
+        return schoolAchievementsService.deleteAchievement(id);
+    }
+
+    @GetMapping("/{id}")
+    public SchoolAchievementsDTO showAchievement(Long id){
+        return schoolAchievementsService.getAchievement(id);
     }
 }

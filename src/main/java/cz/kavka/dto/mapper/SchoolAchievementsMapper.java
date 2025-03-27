@@ -4,7 +4,7 @@ import cz.kavka.dto.SchoolAchievementsDTO;
 import cz.kavka.entity.SchoolAchievementsEntity;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",uses = {SchoolYearMapper.class})
 public interface SchoolAchievementsMapper {
 
     SchoolAchievementsEntity toEntity(SchoolAchievementsDTO schoolAchievementsDTO);
