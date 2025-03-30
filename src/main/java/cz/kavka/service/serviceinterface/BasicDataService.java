@@ -2,22 +2,25 @@ package cz.kavka.service.serviceinterface;
 
 import cz.kavka.dto.BasicDataDTO;
 
+import java.io.IOException;
+
 
 public interface BasicDataService {
 
     /**
-     * Creates or edits a record in database. Main principle is that there will be always one record in specific
-     *      * database table (Long id = 1L)
-     * @param basicDataDTO An DTO object with data of new or edited object
-     * @return DTO representation of a new object
+     * Method for getting BasicData from JSON file
+     * @return a dto representation of BasicData
+     * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO createOrEdit (BasicDataDTO basicDataDTO);
+    BasicDataDTO getBasicData() throws IOException;
 
     /**
-     * Fetches object form database
-     * @return DTO representation of an object
+     * Method which saves provided data to JSON file
+     * @param basicDataDTO provided data
+     * @return a DTO representation of saved data
+     * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO get ();
+    BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException;
 
 
 }

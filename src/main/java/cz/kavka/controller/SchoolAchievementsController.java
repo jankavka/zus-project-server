@@ -39,7 +39,7 @@ public class SchoolAchievementsController {
     }
 
     @GetMapping("/{id}")
-    public SchoolAchievementsDTO showAchievement(Long id){
+    public SchoolAchievementsDTO showAchievement(@PathVariable Long id){
         return schoolAchievementsService.getAchievement(id);
     }
 }

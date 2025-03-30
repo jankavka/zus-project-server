@@ -8,8 +8,6 @@ import java.util.List;
 @Data
 public class BasicDataDTO {
 
-    private Long id = 1L;
-
     private String schoolName;
 
     private String address;

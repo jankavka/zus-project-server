@@ -5,8 +5,10 @@ import cz.kavka.service.serviceinterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
-@RequestMapping("/api/basicData")
+@RequestMapping("/api/static/basic-data")
 public class BasicDataController {
 
     private final BasicDataService basicDataService;
@@ -16,19 +18,14 @@ public class BasicDataController {
         this.basicDataService = basicDataService;
     }
 
-    @PostMapping("/create")
-    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO){
-        return basicDataService.createOrEdit(basicDataDTO);
-    }
-
-    @PutMapping("/edit")
-    public BasicDataDTO editData(@RequestBody BasicDataDTO basicDataDTO){
-        return basicDataService.createOrEdit(basicDataDTO);
+    @PostMapping("/create-or-edit")
+    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO) throws IOException{
+        return basicDataService.createOrEditBasicData(basicDataDTO);
     }
 
     @GetMapping
-    public BasicDataDTO showData(){
-        return basicDataService.get();
+    public BasicDataDTO showData() throws IOException {
+        return basicDataService.getBasicData();
     }
 
 }

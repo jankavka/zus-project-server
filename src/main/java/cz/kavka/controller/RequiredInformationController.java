@@ -5,8 +5,10 @@ import cz.kavka.service.serviceinterface.RequiredInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
-@RequestMapping("/api/required-info")
+@RequestMapping("/api/static/required-info")
 public class RequiredInformationController {
 
     private final RequiredInformationService requiredInformationService;
@@ -16,18 +18,13 @@ public class RequiredInformationController {
         this.requiredInformationService = requiredInformationService;
     }
 
-    @PostMapping("/create")
-    public RequiredInformationDTO create(@RequestBody RequiredInformationDTO requiredInformationDTO) {
-        return requiredInformationService.createOrEdit(requiredInformationDTO);
-    }
-
-    @PutMapping("/edit")
-    public RequiredInformationDTO edit(@RequestBody RequiredInformationDTO requiredInformationDTO) {
+    @PostMapping("/create-or-edit")
+    public RequiredInformationDTO createInfo(@RequestBody RequiredInformationDTO requiredInformationDTO) throws IOException {
         return requiredInformationService.createOrEdit(requiredInformationDTO);
     }
 
     @GetMapping
-    public RequiredInformationDTO showRequiredInfo(){
-        return requiredInformationService.get();
+    public RequiredInformationDTO showRequiredInfo() throws IOException{
+        return requiredInformationService.getInfo();
     }
 }

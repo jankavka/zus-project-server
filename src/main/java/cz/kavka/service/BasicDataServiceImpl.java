@@ -1,36 +1,46 @@
 package cz.kavka.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.kavka.dto.BasicDataDTO;
-import cz.kavka.dto.mapper.BasicDataMapper;
-import cz.kavka.entity.BasicDataEntity;
-import cz.kavka.entity.repository.BasicDataRepository;
 import cz.kavka.service.serviceinterface.BasicDataService;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.IOException;
 
 @Service
 public class BasicDataServiceImpl implements BasicDataService {
 
-    private final BasicDataRepository basicDataRepository;
+    //String path to file which stores data related to BasicData
+    private final String filePath = "src/main/resources/basic-data.json";
 
-    private final BasicDataMapper basicDataMapper;
+    //Object for operations with JSON file
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Autowired
-    public BasicDataServiceImpl(BasicDataRepository basicDataRepository, BasicDataMapper basicDataMapper ) {
-        this.basicDataRepository = basicDataRepository;
-        this.basicDataMapper = basicDataMapper;
-    }
+    //Instance of file loaded form exact path
+    private final File file = new File(filePath);
 
+    /**
+     * Method that creates a data representation in JSON file
+     * @param basicDataDTO provided data
+     * @return a dto representation of saved data
+     * @throws IOException while an error during file operation occurs
+     */
     @Override
-    public BasicDataDTO createOrEdit(BasicDataDTO basicDataDTO) {
-        BasicDataEntity savedEntity = basicDataRepository.save(basicDataMapper.toEntity(basicDataDTO));
-        return basicDataMapper.toDTO(savedEntity);
+    public BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException {
+            objectMapper.writeValue(file, basicDataDTO);
+            return basicDataDTO;
     }
 
+    /**
+     * Method that loads data from JSON file
+     * @return a DTO representation of BasicData
+     * @throws IOException while an error during file operation occurs
+     */
     @Override
-    public BasicDataDTO get() {
-        return basicDataMapper.toDTO(basicDataRepository.findById(1L).orElseThrow(EntityNotFoundException::new));
+    public BasicDataDTO getBasicData() throws IOException {
+        return objectMapper.readValue(file, BasicDataDTO.class);
     }
+
 
 }

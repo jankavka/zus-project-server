@@ -7,8 +7,6 @@ import java.util.Date;
 @Data
 public class RequiredInformationDTO {
 
-    private Long id = 1L;
-
     private String establishment;
 
     private String organizationalStructure;

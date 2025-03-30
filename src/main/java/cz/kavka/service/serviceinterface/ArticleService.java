@@ -17,7 +17,7 @@ public interface ArticleService {
      * Fetches all articles form database
      * @return List of all articles
      */
-    List<ArticleDTO> getAll();
+    List<ArticleDTO> getAll(int limit);
 
     /**
      * Fetches an article with specific id.
@@ -25,6 +25,7 @@ public interface ArticleService {
      * @return DTO object with specific article
      */
     ArticleDTO getArticle(Long id);
+
 
     /**
      * Edits an article with specific id.

@@ -24,8 +24,8 @@ public class ArticleController {
     }
 
     @GetMapping
-    public List<ArticleDTO> showAll(){
-        return articleService.getAll();
+    public List<ArticleDTO> showAll(@RequestParam(required = false, defaultValue = Integer.MAX_VALUE + "") int limit){
+        return articleService.getAll(limit);
     }
 
     @GetMapping("/{id}")

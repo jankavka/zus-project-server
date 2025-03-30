@@ -32,7 +32,7 @@ public class TitleAndContentController {
     }
 
     @GetMapping("/sections")
-    public List<String> sections (){
+    public List<String> listOfKeys (){
         return List.of("history-and-present", "group-training-schedule", "music-theory", "personal-data-protection", "school-fee", "study-focus");
     }
 }

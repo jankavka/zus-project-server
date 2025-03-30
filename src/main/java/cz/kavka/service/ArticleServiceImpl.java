@@ -8,6 +8,7 @@ import cz.kavka.service.serviceinterface.ArticleService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +34,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getAll() {
-        return articleRepository.findAll().stream().map(articleMapper::toDTO).toList();
+    public List<ArticleDTO> getAll(int limit) {
+        return articleRepository.findAll(PageRequest.of(0, limit)).stream().map(articleMapper::toDTO).toList();
     }
 
     @Override
