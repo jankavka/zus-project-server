@@ -20,7 +20,7 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
     /**
      * Reads whole content from json file.
      * @return JSON with all TitleAndContent type records
-     * @throws IOException
+     * @throws IOException while an error during file operation occurs
      */
     @Override
     public Map<String, TitleAndContentDTO> getContent() throws IOException{
@@ -33,7 +33,7 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
      * Gets concrete section from JSON represented by key
      * @param key representation of sub object in JSON
      * @return object of TitleAndContentDTO
-     * @throws IOException
+     * @throws IOException while an error during file operation occurs
      */
     @Override
     public Optional<TitleAndContentDTO> getSection(String key) throws IOException{
@@ -46,7 +46,7 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
      * @param key is String value of sub object in JSON file
      * @param titleAndContentDTO as an object connected with key in JSON file
      * @return updated JSON file
-     * @throws IOException
+     * @throws IOException while an error during file operation occurs
      */
     @Override
     public Map<String, TitleAndContentDTO> updateContent(String key, TitleAndContentDTO titleAndContentDTO) throws IOException {
