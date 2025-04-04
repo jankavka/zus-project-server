@@ -2,6 +2,7 @@ package cz.kavka.dto;
 
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,6 +20,17 @@ public class BasicDataDTO {
 
     private String director;
 
+    private String telephoneNumbers;
+
+    private String webSite;
+
+    //zjistit jestli je třeba když je normální adresa
+    private String mailingAddress;
+
+    private String emailMailingAddress;
+
+    private String taxIdentificationNumber;
+
     private String deputyDirector;
 
     private String founder;
@@ -30,4 +42,7 @@ public class BasicDataDTO {
     private String dataBox;
 
     private String accountNumber;
+
+    private Date issuedDate;
+
 }

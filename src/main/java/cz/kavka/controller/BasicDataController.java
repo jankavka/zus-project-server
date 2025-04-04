@@ -1,25 +1,31 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.BasicDataDTO;
-import cz.kavka.service.BasicDataService;
+import cz.kavka.service.serviceinterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/basicData")
+@RequestMapping("/api/static/basic-data")
 public class BasicDataController {
 
-    private BasicDataService basicDataService;
+    private final BasicDataService basicDataService;
 
     @Autowired
     public BasicDataController(BasicDataService basicDataService){
         this.basicDataService = basicDataService;
     }
 
-    @PostMapping("/create")
-    public BasicDataDTO creatNewData(BasicDataDTO basicDataDTO){
-        return basicDataService.create(basicDataDTO);
+    @PostMapping("/create-or-edit")
+    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO) throws IOException{
+        return basicDataService.createOrEditBasicData(basicDataDTO);
     }
+
+    @GetMapping
+    public BasicDataDTO showData() throws IOException {
+        return basicDataService.getBasicData();
+    }
+
 }
