@@ -1,0 +1,90 @@
+package cz.kavka.service;
+
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.Events;
+import com.google.auth.http.HttpCredentialsAdapter;
+import com.google.auth.oauth2.GoogleCredentials;
+import cz.kavka.service.serviceinterface.CalendarService;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.time.LocalDateTime;
+import java.util.List;
+
+public class CalendarServiceImpl implements CalendarService {
+
+    private final File credentialFile = new File("src/main/resources/service_account_json/credentials.json");
+
+    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+
+    /**
+     * Creates credentials form JSON file
+     * @return GoogleCredentials representation of credentials for access Google Calendar API
+     * @throws IOException while an error occurs during file operations
+     */
+    @Override
+    public GoogleCredentials authorize() throws IOException {
+        return GoogleCredentials
+                .fromStream(new FileInputStream(credentialFile))
+                .createScoped(CalendarScopes.all());
+    }
+
+    /**
+     * This method creates an instance of Calendar using Calendar.Builder using instance of HttpTransport, JsonFactory
+     * and HttpRequestInitializer
+     * @return An object of Calendar
+     * @throws IOException while an error occurs during file operations
+     * @throws GeneralSecurityException when security problem occurs
+     */
+    @Override
+    public Calendar getCalendar() throws IOException, GeneralSecurityException {
+        //HttpTransport instance needed for Calendar.Builder constructor
+        HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+        //makes credentials for creating instance of Calendar
+        GoogleCredentials credentials = authorize();
+        //refreshes credentials. Not sure if it is important.
+        credentials.refresh();
+        //Makes an instance od HttpRequestInitializer with HttpCredentialAdapter class and credentials as an argument
+        HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
+        return new Calendar.Builder(httpTransport, JSON_FACTORY, requestInitializer)
+                .setApplicationName("Calendar")
+                .build();
+    }
+
+    /**
+     * This method finds all events of a Google calendar with specific limitations
+     * @return Events representation of Google calendar events with specific limitations
+     * @throws IOException while an error occurs during file operations
+     * @throws GeneralSecurityException when security problem occurs
+     */
+    @Override
+    public Events getEvents() throws IOException,GeneralSecurityException {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Calendar client = getCalendar();
+        return client.events().list("jankavka89@gmail.com")
+                .setMaxResults(5)
+                .setTimeMin(DateTime.parseRfc3339(localDateTime.toString()))
+                .execute();
+    }
+
+    /**
+     * This method makes list of listed events
+     * @return List representation of listed events
+     * @throws IOException while an error occurs during file operations
+     * @throws GeneralSecurityException when security problem occurs
+     */
+    @Override
+    public List<Event> getListOfEvents() throws IOException, GeneralSecurityException {
+        return getEvents().getItems();
+    }
+}
