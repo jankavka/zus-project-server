@@ -31,7 +31,7 @@ public class TitleAndContentController {
         return titleAndContentService.getSection(key);
     }
 
-    @GetMapping("/sections")
+    @GetMapping("/keys")
     public List<String> listOfKeys (){
         return List.of("history-and-present", "group-training-schedule", "music-theory", "personal-data-protection", "school-fee", "study-focus");
     }
