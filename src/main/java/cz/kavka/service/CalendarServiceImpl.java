@@ -13,6 +13,7 @@ import com.google.api.services.calendar.model.Events;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 import cz.kavka.service.serviceinterface.CalendarService;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,14 +22,18 @@ import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class CalendarServiceImpl implements CalendarService {
 
     private final File credentialFile = new File("src/main/resources/service_account_json/credentials.json");
 
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
+    private final String calendarId = "jankavka89@gmail.com";
+
     /**
      * Creates credentials form JSON file
+     *
      * @return GoogleCredentials representation of credentials for access Google Calendar API
      * @throws IOException while an error occurs during file operations
      */
@@ -42,8 +47,9 @@ public class CalendarServiceImpl implements CalendarService {
     /**
      * This method creates an instance of Calendar using Calendar.Builder using instance of HttpTransport, JsonFactory
      * and HttpRequestInitializer
+     *
      * @return An object of Calendar
-     * @throws IOException while an error occurs during file operations
+     * @throws IOException              while an error occurs during file operations
      * @throws GeneralSecurityException when security problem occurs
      */
     @Override
@@ -63,28 +69,33 @@ public class CalendarServiceImpl implements CalendarService {
 
     /**
      * This method finds all events of a Google calendar with specific limitations
+     *
      * @return Events representation of Google calendar events with specific limitations
-     * @throws IOException while an error occurs during file operations
+     * @throws IOException              while an error occurs during file operations
      * @throws GeneralSecurityException when security problem occurs
      */
     @Override
-    public Events getEvents() throws IOException,GeneralSecurityException {
+    public Events getEvents(int limit, String pageToken) throws IOException, GeneralSecurityException {
         LocalDateTime localDateTime = LocalDateTime.now();
         Calendar client = getCalendar();
-        return client.events().list("jankavka89@gmail.com")
-                .setMaxResults(5)
+        return client.events().list(calendarId)
+                .setMaxResults(limit)
+                .setSingleEvents(true)
+                .setPageToken(pageToken)
                 .setTimeMin(DateTime.parseRfc3339(localDateTime.toString()))
                 .execute();
     }
 
     /**
      * This method makes list of listed events
+     *
      * @return List representation of listed events
-     * @throws IOException while an error occurs during file operations
+     * @throws IOException              while an error occurs during file operations
      * @throws GeneralSecurityException when security problem occurs
      */
     @Override
-    public List<Event> getListOfEvents() throws IOException, GeneralSecurityException {
-        return getEvents().getItems();
+    public List<Event> getListOfEvents(int limit, String pageToken) throws IOException, GeneralSecurityException {
+        return getEvents(limit,pageToken).getItems();
     }
+
 }

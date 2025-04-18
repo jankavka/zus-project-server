@@ -32,7 +32,7 @@ public interface CalendarService {
      * @throws IOException while an error occurs during reading a JSON file
      * @throws GeneralSecurityException when security problem occurs
      */
-    Events getEvents() throws IOException, GeneralSecurityException;
+    Events getEvents(int limit, String pageToken) throws IOException, GeneralSecurityException;
 
     /**
      * This method makes a list from calendar events
@@ -40,7 +40,6 @@ public interface CalendarService {
      * @throws IOException while an error occurs during reading a JSON file
      * @throws GeneralSecurityException when security problem occurs
      */
-    List<Event> getListOfEvents() throws IOException, GeneralSecurityException;
-
+    List<Event> getListOfEvents(int limit, String pageToken) throws IOException, GeneralSecurityException;
 
 }
