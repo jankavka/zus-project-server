@@ -35,8 +35,8 @@ public class CalendarController {
 
     @GetMapping("/all-events")
     public Events showAllEvents (@RequestParam(required = false, defaultValue = Integer.MAX_VALUE + "") int limit,
-                                 @RequestParam(required = false, defaultValue = "") String pageToken)
+                                 @RequestParam(required = false, defaultValue = "") String nextPageToken)
             throws IOException,GeneralSecurityException{
-        return calendarService.getEvents(limit, pageToken);
+        return calendarService.getEvents(limit, nextPageToken);
     }
 }

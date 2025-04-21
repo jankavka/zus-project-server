@@ -79,6 +79,7 @@ public class CalendarServiceImpl implements CalendarService {
         LocalDateTime localDateTime = LocalDateTime.now();
         Calendar client = getCalendar();
         return client.events().list(calendarId)
+                .setOrderBy("startTime")
                 .setMaxResults(limit)
                 .setSingleEvents(true)
                 .setPageToken(pageToken)
