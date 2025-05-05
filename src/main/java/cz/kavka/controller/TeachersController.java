@@ -5,6 +5,8 @@ import cz.kavka.service.serviceinterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/teachers")
 public class TeachersController {
@@ -26,8 +28,13 @@ public class TeachersController {
         return teachersService.edit(teachersDTO,id);
     }
 
-    @GetMapping
-    public TeachersDTO showTeacher(Long id){
+    @GetMapping("/{id}")
+    public TeachersDTO showTeacher(@PathVariable Long id){
         return teachersService.get(id);
+    }
+
+    @GetMapping
+    public List<TeachersDTO> showAllTeachers(){
+        return teachersService.getAll();
     }
 }

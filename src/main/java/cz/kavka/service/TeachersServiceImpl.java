@@ -8,6 +8,8 @@ import cz.kavka.service.serviceinterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeachersServiceImpl implements TeachersService {
 
@@ -38,4 +40,11 @@ public class TeachersServiceImpl implements TeachersService {
     public TeachersDTO get(Long id) {
         return teachersMapper.toDTO(teachersRepository.getReferenceById(id));
     }
+
+    @Override
+    public List<TeachersDTO> getAll() {
+        return teachersRepository.findAll().stream().map(teachersMapper::toDTO).toList();
+    }
+
+
 }
