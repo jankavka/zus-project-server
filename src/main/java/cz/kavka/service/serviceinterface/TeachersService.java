@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface TeachersService {
 
-    TeachersDTO create (TeachersDTO teachersDTO);
+    TeachersDTO createTeacher(TeachersDTO teachersDTO);
 
-    TeachersDTO edit (TeachersDTO teachersDTO, Long id);
+    TeachersDTO editTeacher (TeachersDTO teachersDTO, Long id);
 
-    TeachersDTO get (Long id);
+    TeachersDTO getTeacher (Long id);
 
     List<TeachersDTO> getAll();
+
+    TeachersDTO deleteTeacher(Long id);
 }

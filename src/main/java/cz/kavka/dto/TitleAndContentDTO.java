@@ -19,13 +19,10 @@ import java.util.Date;
 @MappedSuperclass
 public class TitleAndContentDTO {
 
-    //protected Long id = 1L;
+    private String title;
 
-    protected String title;
+    private String content;
 
-    protected String content;
-
-    protected Date issuedDate;
-
+    private Date issuedDate;
 
 }

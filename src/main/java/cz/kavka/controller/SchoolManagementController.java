@@ -2,8 +2,11 @@ package cz.kavka.controller;
 
 import cz.kavka.dto.SchoolManagementDTO;
 import cz.kavka.service.serviceinterface.SchoolManagementService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/school-management")
@@ -17,13 +20,28 @@ public class SchoolManagementController {
     }
 
     @PostMapping("/create")
-    public SchoolManagementDTO create(@RequestBody SchoolManagementDTO schoolManagementDTO){
+    public SchoolManagementDTO createMember(@RequestBody @Valid SchoolManagementDTO schoolManagementDTO){
         return schoolManagementService.createMember(schoolManagementDTO);
     }
 
-    @GetMapping
-    public SchoolManagementDTO showSchoolManagement(Long id){
+    @PutMapping("/{id}/edit")
+    public SchoolManagementDTO edit(@RequestBody @Valid SchoolManagementDTO schoolManagementDTO, @PathVariable Long id){
+        return schoolManagementService.editMember(schoolManagementDTO,id);
+    }
+
+    @GetMapping("/{id}")
+    public SchoolManagementDTO showManagementMember(@PathVariable Long id){
         return schoolManagementService.getMember(id);
+    }
+
+    @GetMapping
+    public List<SchoolManagementDTO> showAll(){
+        return schoolManagementService.getAll();
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public SchoolManagementDTO deleteMember(@PathVariable Long id){
+        return schoolManagementService.deleteMember(id);
     }
 
 }

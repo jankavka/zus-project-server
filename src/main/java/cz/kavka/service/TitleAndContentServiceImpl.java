@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -51,6 +53,7 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
     @Override
     public Map<String, TitleAndContentDTO> updateContent(String key, TitleAndContentDTO titleAndContentDTO) throws IOException {
         File file = new File(FILE_PATH);
+        titleAndContentDTO.setIssuedDate(new Date());
 
         Map<String, TitleAndContentDTO> content = getContent();
         content.put(key, titleAndContentDTO);

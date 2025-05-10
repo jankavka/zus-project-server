@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class SchoolAchievementsDTO {
 
+
     private Long id;
 
     private String title;
