@@ -5,8 +5,11 @@ import cz.kavka.dto.mapper.SchoolManagementMapper;
 import cz.kavka.entity.SchoolManagementEntity;
 import cz.kavka.entity.repository.SchoolManagementRepository;
 import cz.kavka.service.serviceinterface.SchoolManagementService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SchoolManagementServiceImpl implements SchoolManagementService {
@@ -22,7 +25,7 @@ public class SchoolManagementServiceImpl implements SchoolManagementService {
     }
 
     @Override
-    public SchoolManagementDTO createMember(SchoolManagementDTO schoolManagementDTO){
+    public SchoolManagementDTO createMember(SchoolManagementDTO schoolManagementDTO) {
         SchoolManagementEntity savedEntity = schoolManagementRepository.save(schoolManagementMapper.toEntity(schoolManagementDTO));
         return schoolManagementMapper.toDTO(savedEntity);
     }
@@ -37,5 +40,18 @@ public class SchoolManagementServiceImpl implements SchoolManagementService {
     @Override
     public SchoolManagementDTO getMember(Long id) {
         return schoolManagementMapper.toDTO(schoolManagementRepository.getReferenceById(id));
+    }
+
+    @Override
+    public List<SchoolManagementDTO> getAll() {
+        return schoolManagementRepository.findAll().stream().map(schoolManagementMapper::toDTO).toList();
+    }
+
+    @Override
+    public SchoolManagementDTO deleteMember(Long id) {
+        SchoolManagementEntity entityToDelete = schoolManagementRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        schoolManagementRepository.delete(entityToDelete);
+        return schoolManagementMapper.toDTO(entityToDelete);
+
     }
 }

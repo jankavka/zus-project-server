@@ -5,8 +5,10 @@ import cz.kavka.service.serviceinterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/teachers")
+@RequestMapping("/api/teachers")
 public class TeachersController {
 
     private final TeachersService teachersService;
@@ -18,16 +20,26 @@ public class TeachersController {
 
     @PostMapping("/create")
     public TeachersDTO create (@RequestBody TeachersDTO teachersDTO){
-        return teachersService.create(teachersDTO);
+        return teachersService.createTeacher(teachersDTO);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}/edit")
     public TeachersDTO edit(@RequestBody TeachersDTO teachersDTO, @PathVariable Long id){
-        return teachersService.edit(teachersDTO,id);
+        return teachersService.editTeacher(teachersDTO,id);
+    }
+
+    @GetMapping("/{id}")
+    public TeachersDTO showTeacher(@PathVariable Long id){
+        return teachersService.getTeacher(id);
     }
 
     @GetMapping
-    public TeachersDTO showTeacher(Long id){
-        return teachersService.get(id);
+    public List<TeachersDTO> showAllTeachers(){
+        return teachersService.getAll();
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public TeachersDTO removeTeacher(@PathVariable Long id){
+        return teachersService.deleteTeacher(id);
     }
 }

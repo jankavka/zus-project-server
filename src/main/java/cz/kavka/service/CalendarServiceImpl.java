@@ -25,11 +25,11 @@ import java.util.List;
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
-    private final File credentialFile = new File("src/main/resources/service_account_json/credentials.json");
+    private final File credentialFile = new File("src/main/resources/service_account_json/rscalendar-credentials.json");
 
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
-    private final String calendarId = "jankavka89@gmail.com";
+    private final String calendarId = "akce@zusdh.cz";
 
     /**
      * Creates credentials form JSON file

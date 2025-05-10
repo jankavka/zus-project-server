@@ -28,7 +28,6 @@ public class CalendarController {
     public List<Event> showEvents(@RequestParam(required = false, defaultValue = Integer.MAX_VALUE + "") int limit,
                                   @RequestParam(required = false, defaultValue = "") String pageToken)
             throws IOException, GeneralSecurityException {
-
         return calendarService.getListOfEvents(limit, pageToken);
     }
 

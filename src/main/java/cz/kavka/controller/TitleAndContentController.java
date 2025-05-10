@@ -21,7 +21,7 @@ public class TitleAndContentController {
         this.titleAndContentService = titleAndContentService;
     }
 
-    @PostMapping("/update/{key}")
+    @PutMapping("/update/{key}")
     public Map<String, TitleAndContentDTO> updateContent(@PathVariable String key, @RequestBody TitleAndContentDTO titleAndContentDTO) throws IOException {
         return titleAndContentService.updateContent(key, titleAndContentDTO);
     }
