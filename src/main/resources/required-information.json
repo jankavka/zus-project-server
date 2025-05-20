@@ -1,12 +1,37 @@
 {
   "establishment": "yeah",
-  "organizationalStructure": "of couse",
-  "contact": null,
-  "documents": null,
-  "submissionsAndSuggestions": null,
-  "regulations": null,
-  "paymentsForProvidingInformation": null,
-  "annualReport": null,
-  "issuedDate": null,
-  "licenseAgreements": null
+  "organizationalStructure": [
+    "ředitel školy",
+    " zástupce ředitele",
+    " pedagogičtí pracovníci",
+    " ekonomka - účetní",
+    " provozní zaměstnanci "
+  ],
+  "officeHours": "nejsou vymezeny",
+  "founding": " Hlavním účelem zřízení organizace je poskytování základního uměleckého vzdělávání. Škola byla zřízena jako církevní organizace zřizovací listinou vydanou Arcibiskupstvím olomouockým dne 20. dubna 1994. Dne 20. prosince 1996 byla uzavřena smlouva o převodu práv a povinností zřizovatele církevní školy mezi Arcibiskupstvím olomouckým a Biskupstvím ostravsko-opavským. Výše uvedenou zřizovací listinu nahradila zřizovací listina ze dne 28. června 2000.",
+  "telNumbers": "+420 606 602 013, +420 605 587 876",
+  "website": "https://zusdh.cz/",
+  "documents": "viz menu Úřední deska",
+  "submissionsAndSuggestions": "Vyřizování žádostí, stížností, oznámení a podnětů provádí ředitel / ředitelka školy, v případě nepřítomnosti přijímá žádosti o poskytnutí informací zástupce ředitele / ředitelky, tazatel obdrží odpověď / vyjádření k žádosti do 15 dnů od obdržení písemného dotazu, který splňuje všechny náležitosti dle zákona č. 106/1999 Sb. v platném znění, na ústní dotazy osobní nebo telefonické bude odpovězeno ihned, pokud to konkrétní žádost tazatele umožní.",
+  "regulations": [
+    "zákon č. 561/2004 Sb., o předškolním, základním, středním, vyšším odborném a jiném vzdělávání (školský zákon)",
+    "zákon č. 563/2004 Sb., o pedagogických pracovnících a o změně některých zákonů",
+    "zákon č. 262/2006 Sb., zákoník práce",
+    "zákon č. 500/2004 Sb., správní řád",
+    "zákon č. 106/1999 Sb., o svobodném přístupu k informacím",
+    "zákon č. 499/2004 Sb., zákon o archivnictví a spisové službě a o změně některých zákonů",
+    "zákon č. 563/1991 Sb., zákon o účetnictví",
+    "zákon č. 89/2012 Sb., občanský zákoník",
+    "vyhláška č. 71/2005 Sb., o základním uměleckém vzdělávání",
+    "nařízení Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů a o zrušení směrnice 95/46/ES",
+    " "
+  ],
+  "paymentsForProvidingInformation": "Nebyly stanoveny žádné sazby za poskytnutí informací.",
+  "licenseAgreements": "V současné době nejsou Základní uměleckou školou duchovní hudby Frýdek-Místek poskytnuty žádné výhradní licence podle §14a odst. 4 zákona č. 106/1999 Sb.",
+  "annualReport": [
+    " V roce 2022 nebyly žádné informace požadovány.",
+    " V roce 2023 nebyly žádné informace požadovány.",
+    " V roce 2024 nebyly žádné informace požadovány."
+  ],
+  "issuedDate": 1747721919514
 }

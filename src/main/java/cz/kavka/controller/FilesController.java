@@ -20,12 +20,12 @@ public class FilesController {
     }
 
     @GetMapping("/{fileName}")
-    public ResponseEntity<byte[]> getSchoolRules(@PathVariable String fileName) throws IOException {
+    public ResponseEntity<byte[]> getPdfFile(@PathVariable String fileName) throws IOException {
         return fileService.getPdf(fileName);
     }
 
     @PostMapping("/{fileName}")
-    public void editPdf (@PathVariable String fileName, String filePathFromPc) throws IOException{
+    public void editPdfFile (@PathVariable String fileName, String filePathFromPc) throws IOException{
         fileService.uploadPdf(fileName, filePathFromPc);
     }
 }

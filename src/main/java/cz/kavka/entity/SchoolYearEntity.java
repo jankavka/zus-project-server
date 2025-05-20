@@ -21,5 +21,5 @@ public class SchoolYearEntity {
     private String schoolYear;
 
     @OneToMany(mappedBy = "schoolYear")
-    private List<SchoolAchievementsEntity> schoolAchievementsEntities;
+    private List<SchoolAchievementsEntity> schoolAchievements;
 }

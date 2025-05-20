@@ -27,16 +27,24 @@ public class BasicDataDTO {
     //zjistit jestli je třeba když je normální adresa
     private String mailingAddress;
 
+    //elektronická adresa podatelny
     private String emailMailingAddress;
 
+    //IČO
+    private String identificationNumber;
+
+    //DIČ
     private String taxIdentificationNumber;
 
     private String deputyDirector;
 
+    //"zřizovatel"
     private String founder;
 
+    //REDIZO
     private Integer idNumber;
 
+    //IZO
     private Integer organizationIdentificationMark;
 
     private String dataBox;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 public class RequiredInformationServiceImpl implements RequiredInformationService {
@@ -28,7 +29,7 @@ public class RequiredInformationServiceImpl implements RequiredInformationServic
      */
     @Override
     public RequiredInformationDTO createOrEdit(RequiredInformationDTO requiredInformationDTO) throws IOException {
-
+        requiredInformationDTO.setIssuedDate(new Date());
         objectMapper.writeValue(file, requiredInformationDTO);
         return requiredInformationDTO;
     }
