@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 public class BasicDataServiceImpl implements BasicDataService {
@@ -28,6 +29,7 @@ public class BasicDataServiceImpl implements BasicDataService {
      */
     @Override
     public BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException {
+            basicDataDTO.setIssuedDate(new Date());
             objectMapper.writeValue(file, basicDataDTO);
             return basicDataDTO;
     }

@@ -3,27 +3,34 @@ package cz.kavka.dto;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class RequiredInformationDTO {
 
     private String establishment;
 
-    private String organizationalStructure;
+    private List<String> organizationalStructure;
 
-    private String contact;
+    private String officeHours;
+
+    private String founding;
+
+    private String telNumbers;
+
+    private String website;
 
     private String documents;
 
     private String submissionsAndSuggestions;
 
-    private String regulations;
+    private List<String> regulations;
 
     private String paymentsForProvidingInformation;
 
-    private String LicenseAgreements;
+    private String licenseAgreements;
 
-    private String annualReport;
+    private List<String> annualReport;
 
     private Date issuedDate;
 
