@@ -14,7 +14,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public ResponseEntity<byte[]> getPdf(String fileName) throws IOException {
-        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "pdf_files" + File.separator;
+        String filePath = "data" + File.separator + "data/pdf_files" + File.separator;
         File file = new File(filePath + fileName);
         byte[] pdf = FileUtils.readFileToByteArray(file);
 
@@ -26,7 +26,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void uploadPdf(String fileName, String filePathFromPc) throws IOException {
-        String filePath = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "pdf_files" + File.separator;
+        String filePath = "data" + File.separator + "data/pdf_files" + File.separator;
         File oldFile = new File(filePath + fileName);
         File newFile = new File(filePathFromPc);
         FileUtils.copyFile(newFile, oldFile);

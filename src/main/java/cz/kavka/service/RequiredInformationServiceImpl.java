@@ -13,7 +13,7 @@ import java.util.Date;
 public class RequiredInformationServiceImpl implements RequiredInformationService {
 
     //String path to file which stores data related to RequiredInformation
-    private final String filePath = "src/main/resources/required-information.json";
+    private final String filePath = "data/required-information.json";
 
     //Instance of file loaded form exact path
     private final File file = new File(filePath);

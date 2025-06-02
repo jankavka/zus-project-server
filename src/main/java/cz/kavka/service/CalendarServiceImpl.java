@@ -15,9 +15,10 @@ import com.google.auth.oauth2.GoogleCredentials;
 import cz.kavka.service.serviceinterface.CalendarService;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +26,8 @@ import java.util.List;
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
-    private final File credentialFile = new File("src/main/resources/service_account_json/rscalendar-credentials.json");
+    //private final File credentialFile = new File("src/main/resources/service_account_json/rscalendar-credentials.json");
+
 
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
@@ -39,9 +41,24 @@ public class CalendarServiceImpl implements CalendarService {
      */
     @Override
     public GoogleCredentials authorize() throws IOException {
-        return GoogleCredentials
-                .fromStream(new FileInputStream(credentialFile))
-                .createScoped(CalendarScopes.all());
+
+        try (InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream("service_account_json/rscalendar-credentials.json")) {
+
+            if (inputStream == null) {
+                throw new FileNotFoundException("File not found");
+            }
+            return GoogleCredentials
+                    .fromStream(inputStream)
+                    //.fromStream(new FileInputStream(credentialFile))
+                    .createScoped(CalendarScopes.all());
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File not found");
+        }
+
+
     }
 
     /**
@@ -96,7 +113,7 @@ public class CalendarServiceImpl implements CalendarService {
      */
     @Override
     public List<Event> getListOfEvents(int limit, String pageToken) throws IOException, GeneralSecurityException {
-        return getEvents(limit,pageToken).getItems();
+        return getEvents(limit, pageToken).getItems();
     }
 
 }
