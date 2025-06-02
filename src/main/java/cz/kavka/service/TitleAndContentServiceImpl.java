@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class TitleAndContentServiceImpl implements TitleAndContentService {
 
-    private final String FILE_PATH = "src/main/resources/title-and-content.json";
+    private final String FILE_PATH = "data/title-and-content.json";
     private final ObjectMapper objectMapper= new ObjectMapper();
 
     /**

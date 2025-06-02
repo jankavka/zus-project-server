@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("/api/static/basic-data")
@@ -19,12 +20,12 @@ public class BasicDataController {
     }
 
     @PostMapping("/create-or-edit")
-    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO) throws IOException{
+    public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO) throws IOException, URISyntaxException {
         return basicDataService.createOrEditBasicData(basicDataDTO);
     }
 
     @GetMapping
-    public BasicDataDTO showData() throws IOException {
+    public BasicDataDTO showData() throws IOException, URISyntaxException {
         return basicDataService.getBasicData();
     }
 

@@ -3,6 +3,7 @@ package cz.kavka.service.serviceinterface;
 import cz.kavka.dto.BasicDataDTO;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 public interface BasicDataService {
@@ -12,7 +13,7 @@ public interface BasicDataService {
      * @return a dto representation of BasicData
      * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO getBasicData() throws IOException;
+    BasicDataDTO getBasicData() throws IOException, URISyntaxException;
 
     /**
      * Method which saves provided data to JSON file
@@ -20,7 +21,7 @@ public interface BasicDataService {
      * @return a DTO representation of saved data
      * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException;
+    BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException,URISyntaxException;
 
 
 }

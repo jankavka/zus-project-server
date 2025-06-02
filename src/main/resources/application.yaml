@@ -1,6 +1,7 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost/zusProjectServer?createDatabaseIfNotExist=true
+    #url: jdbc:mysql://db:3306/zusProjectServer?createDatabaseIfNotExist=true
     username: root
     password:
   jpa:
@@ -8,6 +9,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    #properties:
+      #hibernate: org.hibernate.dialect.MySQL8Dialect
+
   jackson:
     mapper:
       accept-case-insensitive-enums: true
@@ -15,3 +19,5 @@ spring:
 server:
   address: 0.0.0.0
   port: 8080
+
+debug: true
