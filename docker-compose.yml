@@ -6,6 +6,7 @@ services:
     container_name: zus-backend
     volumes:
       - ./data:/app/data
+      - ./uploads:/app/uploads
     ports:
       - "8080:8080"
     depends_on:

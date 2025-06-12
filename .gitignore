@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### directory for uploading photos ###
+/uploads/**
+!/uploads/.gitkeep
