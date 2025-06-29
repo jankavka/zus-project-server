@@ -34,6 +34,10 @@ public interface PhotoAndAlbumService {
 
     AlbumDTO editAlbumInfo(String albumName, AlbumDTO albumDTO) throws IOException;
 
+    AlbumDTO getAlbum(String albumName);
+
+    ImageDTO getOneImage(String albumName);
+
 
 
 

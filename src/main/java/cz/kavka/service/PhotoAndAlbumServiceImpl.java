@@ -83,11 +83,10 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
 
             // new ImageEntity instance
             ImageEntity entity = new ImageEntity();
-            System.out.println("Entity: " + entity);
 
             entity.setFileName(uniqueFileName);
             entity.setAlbum(albumRepository.findByAlbumName(albumName));
-            System.out.println("album: " + entity.getAlbum());
+
             entity.setUrl("/uploads/" + albumName + "/" + uniqueFileName);
             entities.add(entity);
 
@@ -121,7 +120,7 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
     public List<ImageDTO> getAllImagesInAlbum(String albumName) {
         AlbumEntity albumEntity = albumRepository.findByAlbumName(albumName);
 
-        return imageRepository.findAllByAlbumsName(albumEntity)
+        return imageRepository.findAllByAlbumsEntity(albumEntity)
                 .stream()
                 .map(imageMapper::toDTO)
                 .toList();
@@ -165,13 +164,11 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
     public ResponseEntity<ImageDTO> deleteImage(Long id) throws IOException {
         ImageEntity image = imageRepository.getReferenceById(id);
         Path imagePath = Path.of(uploadDir, image.getAlbum().getAlbumName(), image.getFileName());
-        log.info("Vymazat: " + imagePath.toAbsolutePath());
 
         try {
             Files.delete(imagePath);
         } catch (IOException e) {
-            e.printStackTrace();
-            log.info("Chyba: " + e.getMessage());
+            log.info("Error: {}", e.getMessage());
             throw new IOException("Internal server error. Image wasn't deleted.", e);
         }
 
@@ -183,21 +180,58 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
     @Override
     public AlbumDTO editAlbumInfo(String albumName, AlbumDTO albumDTO) throws IOException {
 
+        //normalizes new album (directory) name
+        albumDTO.setAlbumName(normalizeAlbumName(albumDTO.getAlbumName()));
+
+        //path from witch data will be moved
         Path source = Path.of(uploadDir, albumName);
+        //path as target for moved data
         Path target = Path.of(uploadDir, albumDTO.getAlbumName());
 
         try {
+            //moved data from source to target using a type of StandardCopyOption
             Files.move(source, target, StandardCopyOption.ATOMIC_MOVE);
         } catch (FileAlreadyExistsException e) {
             throw new IOException("File name already exists", e);
         }
 
+        //id of edited album
         Long id = albumRepository.findByAlbumName(albumName).getId();
 
+        //entities of images we have to set a new url
+        List<ImageEntity> images = imageRepository.findAllByAlbumsEntity(albumRepository.findByAlbumName(albumName));
+
+        //setting a new url and saving into database
+        for (ImageEntity image : images) {
+            image.setUrl("/uploads/" + albumDTO.getAlbumName() + "/" + image.getFileName());
+            imageRepository.save(image);
+        }
+
+        //Mapping dto to entity
         AlbumEntity album = albumMapper.toEntity(albumDTO);
+
+        //setting id
         album.setId(id);
+
+        //saving entity into db
         albumRepository.save(album);
+
         return albumMapper.toDTO(album);
+    }
+
+    @Override
+    public AlbumDTO getAlbum(String albumName) {
+
+        AlbumDTO album = albumMapper.toDTO(albumRepository.findByAlbumName(albumName));
+        album.setImages(getAllImagesInAlbum(albumName));
+        return album;
+    }
+
+    @Override
+    public ImageDTO getOneImage(String albumName) {
+
+        AlbumEntity album = albumRepository.findByAlbumName(albumName);
+        return imageMapper.toDTO(imageRepository.getOneImage(album));
     }
 
 

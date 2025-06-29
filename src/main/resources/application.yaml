@@ -27,6 +27,11 @@ server:
   address: 0.0.0.0
   port: 8080
 
+youtube:
+  api:
+    key: AIzaSyBnoAupUJ6oVyeEgnFKuMzOQ-R4XBxXZDk
+    channel-id: UCqFOHLSg-jmCS__QRZgmqXw
+
 debug: false
 
 logging:
