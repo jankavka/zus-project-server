@@ -11,7 +11,9 @@ public class AlbumDTO {
 
     private String albumName;
 
+    private String leadPictureUrl;
+
     private String albumDescription;
 
-    //private List<ImageDTO> images;
+    private List<ImageDTO> images;
 }

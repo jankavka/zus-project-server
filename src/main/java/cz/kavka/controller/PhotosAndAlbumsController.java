@@ -42,9 +42,19 @@ public class PhotosAndAlbumsController {
         return photoService.getAllImagesInAlbum(albumName);
     }
 
+    @GetMapping("/get-one-image/{albumName}")
+    public ImageDTO getOneImage(@PathVariable String albumName){
+        return photoService.getOneImage(albumName);
+    }
+
     @GetMapping("/all-albums-names")
     public List<String> showAllAlbumNames(){
         return photoService.getAllAlbumsNames();
+    }
+
+    @GetMapping("/get-album/{albumName}")
+    public AlbumDTO showAlbum(@PathVariable String albumName){
+        return photoService.getAlbum(albumName);
     }
 
     @DeleteMapping("/delete-album/{albumName}")

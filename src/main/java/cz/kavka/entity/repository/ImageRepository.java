@@ -11,5 +11,8 @@ import java.util.List;
 public interface ImageRepository extends JpaRepository<ImageEntity, Long> {
 
     @Query(value = "SELECT * FROM image_entity WHERE album_id = :#{#album.getId()}", nativeQuery = true)
-    List<ImageEntity> findAllByAlbumsName(@Param("album")AlbumEntity album);
+    List<ImageEntity> findAllByAlbumsEntity(@Param("album") AlbumEntity album);
+
+    @Query(value = "SELECT * FROM image_entity WHERE album_id = :#{#album.getId()} LIMIT 1", nativeQuery = true)
+    ImageEntity getOneImage(@Param("album") AlbumEntity album);
 }

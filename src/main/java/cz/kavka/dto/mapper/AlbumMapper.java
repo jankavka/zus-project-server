@@ -10,7 +10,7 @@ public interface AlbumMapper {
 
     AlbumEntity toEntity(AlbumDTO albumDTO);
 
-    //@Mapping(target = "images", ignore = true)
+    @Mapping(target = "images", ignore = true)
     AlbumDTO toDTO(AlbumEntity albumEntity);
 
 }

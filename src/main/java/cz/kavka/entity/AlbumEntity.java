@@ -22,6 +22,9 @@ public class AlbumEntity {
     @Column
     private String albumDescription;
 
+    @Column
+    private String leadPictureUrl;
+
     @OneToMany(mappedBy = "album")
     private List<ImageEntity> images;
 }
