@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.TitleAndContentDTO;
 import cz.kavka.service.TitleAndContentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class TitleAndContentController {
         this.titleAndContentService = titleAndContentService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/update/{key}")
     public Map<String, TitleAndContentDTO> updateContent(@PathVariable String key, @RequestBody TitleAndContentDTO titleAndContentDTO) throws IOException {
         return titleAndContentService.updateContent(key, titleAndContentDTO);

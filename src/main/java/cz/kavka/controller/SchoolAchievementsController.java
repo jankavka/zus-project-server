@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.SchoolAchievementsDTO;
 import cz.kavka.service.SchoolAchievementsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +19,13 @@ public class SchoolAchievementsController {
         this.schoolAchievementsService = schoolAchievementsService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create")
     public SchoolAchievementsDTO createAchievement (@RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
         return schoolAchievementsService.createAchievement(schoolAchievementsDTO);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/edit/{id}")
     public SchoolAchievementsDTO editAchievement (@PathVariable Long id, @RequestBody SchoolAchievementsDTO schoolAchievementsDTO){
         return schoolAchievementsService.updateAchievement(id, schoolAchievementsDTO);
@@ -33,6 +36,7 @@ public class SchoolAchievementsController {
         return schoolAchievementsService.getAllAchievements();
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete/{id}")
     public SchoolAchievementsDTO deleteAchievement (@PathVariable Long id){
         return schoolAchievementsService.deleteAchievement(id);

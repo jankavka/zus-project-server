@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.TeachersDTO;
 import cz.kavka.service.serviceinterface.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +19,13 @@ public class TeachersController {
         this.teachersService = teachersService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create")
     public TeachersDTO create (@RequestBody TeachersDTO teachersDTO){
         return teachersService.createTeacher(teachersDTO);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/{id}/edit")
     public TeachersDTO edit(@RequestBody TeachersDTO teachersDTO, @PathVariable Long id){
         return teachersService.editTeacher(teachersDTO,id);
@@ -38,6 +41,7 @@ public class TeachersController {
         return teachersService.getAll();
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}/delete")
     public TeachersDTO removeTeacher(@PathVariable Long id){
         return teachersService.deleteTeacher(id);

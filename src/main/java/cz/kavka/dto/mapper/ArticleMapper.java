@@ -4,7 +4,7 @@ import cz.kavka.dto.ArticleDTO;
 import cz.kavka.entity.ArticleEntity;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ImageMapper.class)
 public interface ArticleMapper {
 
     ArticleDTO toDTO(ArticleEntity articleEntity);

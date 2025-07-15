@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.BasicDataDTO;
 import cz.kavka.service.serviceinterface.BasicDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class BasicDataController {
         this.basicDataService = basicDataService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create-or-edit")
     public BasicDataDTO createData(@RequestBody BasicDataDTO basicDataDTO) throws IOException, URISyntaxException {
         return basicDataService.createOrEditBasicData(basicDataDTO);

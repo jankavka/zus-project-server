@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface ImageRepository extends JpaRepository<ImageEntity, Long> {
 
+    //Not recommended usage of SpEL -> :#{#album.getId()}
     @Query(value = "SELECT * FROM image_entity WHERE album_id = :#{#album.getId()}", nativeQuery = true)
     List<ImageEntity> findAllByAlbumsEntity(@Param("album") AlbumEntity album);
 

@@ -6,7 +6,8 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity(name = "article")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArticleEntity {
@@ -23,5 +24,8 @@ public class ArticleEntity {
 
     @Column
     private LocalDate issuedDate = LocalDate.now();
+
+    @ManyToOne
+    private ImageEntity image;
 
 }

@@ -4,6 +4,7 @@ import cz.kavka.dto.ArticleDTO;
 import cz.kavka.dto.mapper.ArticleMapper;
 import cz.kavka.entity.ArticleEntity;
 import cz.kavka.entity.repository.ArticleRepository;
+import cz.kavka.entity.repository.ImageRepository;
 import cz.kavka.service.serviceinterface.ArticleService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +22,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
 
+    private final ImageRepository imageRepository;
+
     @Autowired
-    public ArticleServiceImpl(ArticleMapper articleMapper, ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleMapper articleMapper, ArticleRepository articleRepository, ImageRepository imageRepository) {
         this.articleMapper = articleMapper;
         this.articleRepository = articleRepository;
+        this.imageRepository = imageRepository;
     }
 
     @Override
@@ -51,9 +55,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<ArticleDTO> getArticles(String titleImageAlbumName) {
+        return articleRepository.getArticles(titleImageAlbumName).stream()
+                .map(articleMapper::toDTO)
+                .toList();
+    }
+
+    @Override
     public ArticleDTO editArticle(ArticleDTO articleDTO, Long id) {
-        articleDTO.setId(id);
-        ArticleEntity savedEntity = articleRepository.save(articleMapper.toEntity(articleDTO));
+        ArticleEntity entity = articleMapper.toEntity(articleDTO);
+        entity.setId(id);
+        entity.setImage(imageRepository.getReferenceById(articleDTO.getImage().getId()));
+        ArticleEntity savedEntity = articleRepository.save(entity);
         return articleMapper.toDTO(savedEntity);
     }
 

@@ -43,5 +43,10 @@ public class ArticleController {
         return articleService.deleteArticle(id);
     }
 
+    @GetMapping("/album-name/{titleImageAlbumName}")
+    public List<ArticleDTO> getArticles(@PathVariable String titleImageAlbumName){
+        return articleService.getArticles(titleImageAlbumName);
+    }
+
 
 }
