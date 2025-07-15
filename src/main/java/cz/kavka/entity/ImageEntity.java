@@ -3,11 +3,13 @@ package cz.kavka.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class ImageEntity {
 
 
@@ -23,5 +25,8 @@ public class ImageEntity {
 
     @ManyToOne
     private AlbumEntity album;
+
+    @OneToMany (mappedBy = "image")
+    private List<ArticleEntity> articles;
 
 }

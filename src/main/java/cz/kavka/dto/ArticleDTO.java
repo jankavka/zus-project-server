@@ -17,6 +17,8 @@ public class ArticleDTO {
 
     private Date issuedDate;
 
+    private ImageDTO image;
+
 
 
 

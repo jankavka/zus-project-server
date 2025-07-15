@@ -4,6 +4,7 @@ import cz.kavka.dto.SchoolManagementDTO;
 import cz.kavka.service.serviceinterface.SchoolManagementService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +20,13 @@ public class SchoolManagementController {
         this.schoolManagementService = schoolManagementService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create")
     public SchoolManagementDTO createMember(@RequestBody @Valid SchoolManagementDTO schoolManagementDTO){
         return schoolManagementService.createMember(schoolManagementDTO);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/{id}/edit")
     public SchoolManagementDTO edit(@RequestBody @Valid SchoolManagementDTO schoolManagementDTO, @PathVariable Long id){
         return schoolManagementService.editMember(schoolManagementDTO,id);
@@ -39,6 +42,7 @@ public class SchoolManagementController {
         return schoolManagementService.getAll();
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/{id}/delete")
     public SchoolManagementDTO deleteMember(@PathVariable Long id){
         return schoolManagementService.deleteMember(id);

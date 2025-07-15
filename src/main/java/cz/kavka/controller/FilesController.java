@@ -3,9 +3,9 @@ package cz.kavka.controller;
 import cz.kavka.service.serviceinterface.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.io.IOException;
 
 @RestController
@@ -24,6 +24,7 @@ public class FilesController {
         return fileService.getPdf(fileName);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/{fileName}")
     public void editPdfFile (@PathVariable String fileName, String filePathFromPc) throws IOException{
         fileService.uploadPdf(fileName, filePathFromPc);

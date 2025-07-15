@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.RequiredInformationDTO;
 import cz.kavka.service.serviceinterface.RequiredInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class RequiredInformationController {
         this.requiredInformationService = requiredInformationService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create-or-edit")
     public RequiredInformationDTO createInfo(@RequestBody RequiredInformationDTO requiredInformationDTO) throws IOException {
         return requiredInformationService.createOrEdit(requiredInformationDTO);

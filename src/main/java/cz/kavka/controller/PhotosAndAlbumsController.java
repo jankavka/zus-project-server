@@ -5,6 +5,7 @@ import cz.kavka.dto.ImageDTO;
 import cz.kavka.service.serviceinterface.PhotoAndAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,17 +58,20 @@ public class PhotosAndAlbumsController {
         return photoService.getAlbum(albumName);
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete-album/{albumName}")
     public ResponseEntity<AlbumDTO> deleteAlbum(@PathVariable String albumName) throws IOException{
         photoService.deleteAlbum(albumName);
         return photoService.deleteAlbum(albumName);
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete-image/{id}")
     public ResponseEntity<ImageDTO> deleteImage(@PathVariable Long id) throws IOException{
         return photoService.deleteImage(id);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/edit-album/{albumName}")
     public AlbumDTO editAlbum(@PathVariable String albumName, @RequestBody AlbumDTO albumDTO) throws IOException{
         return photoService.editAlbumInfo(albumName, albumDTO);

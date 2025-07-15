@@ -26,6 +26,13 @@ public interface ArticleService {
      */
     ArticleDTO getArticle(Long id);
 
+    /**
+     * Fetches an articles where url of title image contains titleImageAlbumName
+     * @param titleImageAlbumName string representing album name where title image belongs
+     * @return articles with used image from specified album name
+     */
+    List<ArticleDTO> getArticles(String titleImageAlbumName);
+
 
     /**
      * Edits an article with specific id.
