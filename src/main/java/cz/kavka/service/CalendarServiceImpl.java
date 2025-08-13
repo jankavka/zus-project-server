@@ -1,6 +1,5 @@
 package cz.kavka.service;
 
-import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -13,6 +12,7 @@ import com.google.api.services.calendar.model.Events;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 import cz.kavka.service.serviceinterface.CalendarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -20,18 +20,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
 
-    //private final File credentialFile = new File("src/main/resources/service_account_json/rscalendar-credentials.json");
-
-
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
-    private final String calendarId = "akce@zusdh.cz";
+    //HttpTransport instance needed for Calendar.Builder constructor
+    private final HttpTransport httpTransport;
+
+    @Autowired
+    public CalendarServiceImpl(HttpTransport httpTransport){
+        this.httpTransport = httpTransport;
+    }
 
     /**
      * Creates credentials form JSON file
@@ -42,9 +44,11 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public GoogleCredentials authorize() throws IOException {
 
+        String resource = "service_account_json/rscalendar-credentials.json";
+
         try (InputStream inputStream = getClass()
                 .getClassLoader()
-                .getResourceAsStream("service_account_json/rscalendar-credentials.json")) {
+                .getResourceAsStream(resource)) {
 
             if (inputStream == null) {
                 throw new FileNotFoundException("File not found");
@@ -54,11 +58,7 @@ public class CalendarServiceImpl implements CalendarService {
                     //.fromStream(new FileInputStream(credentialFile))
                     .createScoped(CalendarScopes.all());
 
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("File not found");
         }
-
-
     }
 
     /**
@@ -71,14 +71,15 @@ public class CalendarServiceImpl implements CalendarService {
      */
     @Override
     public Calendar getCalendar() throws IOException, GeneralSecurityException {
-        //HttpTransport instance needed for Calendar.Builder constructor
-        HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         //makes credentials for creating instance of Calendar
         GoogleCredentials credentials = authorize();
-        //refreshes credentials. Not sure if it is important.
-        credentials.refresh();
         //Makes an instance od HttpRequestInitializer with HttpCredentialAdapter class and credentials as an argument
-        HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
+        HttpRequestInitializer requestInitializer = request -> {
+            new HttpCredentialsAdapter(credentials).initialize(request);
+            request.setConnectTimeout(20_000);
+            request.setReadTimeout(20_000);
+            request.setNumberOfRetries(3);
+        };
         return new Calendar.Builder(httpTransport, JSON_FACTORY, requestInitializer)
                 .setApplicationName("Calendar")
                 .build();
@@ -93,14 +94,17 @@ public class CalendarServiceImpl implements CalendarService {
      */
     @Override
     public Events getEvents(int limit, String pageToken) throws IOException, GeneralSecurityException {
-        LocalDateTime localDateTime = LocalDateTime.now();
+        //LocalDateTime localDateTime = LocalDateTime.now();
+        DateTime timeMin = new DateTime(System.currentTimeMillis());
         Calendar client = getCalendar();
+        String calendarId = "akce@zusdh.cz";
         return client.events().list(calendarId)
                 .setOrderBy("startTime")
                 .setMaxResults(limit)
                 .setSingleEvents(true)
                 .setPageToken(pageToken)
-                .setTimeMin(DateTime.parseRfc3339(localDateTime.toString()))
+                .setTimeMin(timeMin)
+                //.setTimeMin(DateTime.parseRfc3339(localDateTime.toString()))
                 .execute();
     }
 
@@ -113,7 +117,11 @@ public class CalendarServiceImpl implements CalendarService {
      */
     @Override
     public List<Event> getListOfEvents(int limit, String pageToken) throws IOException, GeneralSecurityException {
-        return getEvents(limit, pageToken).getItems();
+        var events = getEvents(limit, pageToken);
+        var items = events.getItems();
+
+        return (items != null) ? items : List.of();
+
     }
 
 }

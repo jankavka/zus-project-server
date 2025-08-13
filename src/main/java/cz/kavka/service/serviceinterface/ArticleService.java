@@ -14,10 +14,12 @@ public interface ArticleService {
     ArticleDTO createArticle(ArticleDTO articleDTO);
 
     /**
-     * Fetches all articles form database
-     * @return List of all articles
+     * Fetches articles from database
+     * @param limit max number of returned articles
+     * @param page number of page
+     * @return list of ArticleDTO objects
      */
-    List<ArticleDTO> getAll(int limit);
+    List<ArticleDTO> getAll(int limit, int page);
 
     /**
      * Fetches an article with specific id.

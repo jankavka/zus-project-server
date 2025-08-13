@@ -13,7 +13,7 @@ public interface BasicDataService {
      * @return a dto representation of BasicData
      * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO getBasicData() throws IOException, URISyntaxException;
+    BasicDataDTO getBasicData() throws IOException;
 
     /**
      * Method which saves provided data to JSON file
@@ -21,7 +21,7 @@ public interface BasicDataService {
      * @return a DTO representation of saved data
      * @throws IOException while an error during file operation occurs
      */
-    BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException,URISyntaxException;
+    BasicDataDTO createOrEditBasicData(BasicDataDTO basicDataDTO) throws IOException;
 
 
 }

@@ -26,7 +26,7 @@ public class ImageEntity {
     @ManyToOne
     private AlbumEntity album;
 
-    @OneToMany (mappedBy = "image")
-    private List<ArticleEntity> articles;
+//    @OneToMany (mappedBy = "image")
+//    private List<ArticleEntity> articles;
 
 }
