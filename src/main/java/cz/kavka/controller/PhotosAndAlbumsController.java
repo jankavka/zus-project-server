@@ -23,11 +23,13 @@ public class PhotosAndAlbumsController {
         this.photoService = photoService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/add-photos")
     public ResponseEntity<String> savePhotos(@RequestParam("files") MultipartFile[] files, @RequestParam("albumName") String albumName) throws IOException {
         return photoService.uploadPhotos(files, albumName);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/new-album")
     public AlbumDTO saveAlbum(@RequestBody AlbumDTO albumDTO) throws IOException{
         return photoService.createAlbum(albumDTO);
@@ -61,7 +63,6 @@ public class PhotosAndAlbumsController {
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete-album/{albumName}")
     public ResponseEntity<AlbumDTO> deleteAlbum(@PathVariable String albumName) throws IOException{
-        photoService.deleteAlbum(albumName);
         return photoService.deleteAlbum(albumName);
     }
 

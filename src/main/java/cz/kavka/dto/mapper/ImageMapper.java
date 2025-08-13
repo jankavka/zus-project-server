@@ -5,12 +5,12 @@ import cz.kavka.entity.ImageEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = AlbumMapper.class)
+@Mapper(componentModel = "spring")
 public interface ImageMapper {
 
-    @Mapping(target = "articles", ignore = true)
+
     ImageEntity toEntity(ImageDTO imageDTO);
 
-    @Mapping(target = "articles", ignore = true)
+    @Mapping(target = "album", ignore = true)
     ImageDTO toDTO(ImageEntity imageEntity);
 }

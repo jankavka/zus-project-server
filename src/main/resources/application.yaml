@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/zusProjectServer?createDatabaseIfNotExist=true
-    #url: jdbc:mysql://db:3306/zusProjectServer?createDatabaseIfNotExist=true
+    #url: jdbc:mysql://localhost/zusProjectServer?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://db:3306/zusProjectServer?createDatabaseIfNotExist=true
     username: root
     password:
   jpa:
@@ -40,3 +40,12 @@ logging:
     com.zaxxer.hikari: INFO
   pattern:
     console: "%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"
+
+basicdata:
+  file-path: ./data/basic-data.json
+
+files:
+  file-path: ./data/pdf_files
+
+requiredinformation:
+  file-path: ./data/required-information.json

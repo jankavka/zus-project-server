@@ -1,6 +1,7 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.SchoolAchievementsDTO;
+import cz.kavka.dto.SchoolYearDTO;
 import cz.kavka.service.SchoolAchievementsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -31,11 +32,6 @@ public class SchoolAchievementsController {
         return schoolAchievementsService.updateAchievement(id, schoolAchievementsDTO);
     }
 
-    @GetMapping
-    public List<SchoolAchievementsDTO> showAllSchoolAchievements(){
-        return schoolAchievementsService.getAllAchievements();
-    }
-
     @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete/{id}")
     public SchoolAchievementsDTO deleteAchievement (@PathVariable Long id){
@@ -45,5 +41,10 @@ public class SchoolAchievementsController {
     @GetMapping("/{id}")
     public SchoolAchievementsDTO showAchievement(@PathVariable Long id){
         return schoolAchievementsService.getAchievement(id);
+    }
+
+    @GetMapping("/year/{yearId}")
+    public List<SchoolAchievementsDTO> getAchievementsByYear(@PathVariable Long yearId){
+        return schoolAchievementsService.getAchievementsByYear(yearId);
     }
 }

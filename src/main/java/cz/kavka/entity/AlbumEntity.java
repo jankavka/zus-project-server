@@ -1,5 +1,6 @@
 package cz.kavka.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,9 @@ public class AlbumEntity {
     @Column
     private String leadPictureUrl;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
+
+    @Column
+    private boolean isHidden;
 }

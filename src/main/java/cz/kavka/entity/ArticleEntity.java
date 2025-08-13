@@ -25,7 +25,6 @@ public class ArticleEntity {
     @Column
     private LocalDate issuedDate = LocalDate.now();
 
-    @ManyToOne
-    private ImageEntity image;
+    private String imageUrl;
 
 }

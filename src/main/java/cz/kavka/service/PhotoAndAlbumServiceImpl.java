@@ -92,8 +92,15 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
 
             imageRepository.save(entity);
 
+            if (getAllImagesInAlbum(albumName).size() == 1) {
+                AlbumEntity currentAlbum = albumMapper.toEntity(getAlbum(albumName));
+                currentAlbum.setLeadPictureUrl(entity.getUrl());
+                albumRepository.save(currentAlbum);
+            }
+
 
         }
+
         //Returns path of uploaded album
         return ResponseEntity.ok(entities.toString());
     }
@@ -142,6 +149,10 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
     public ResponseEntity<AlbumDTO> deleteAlbum(String albumName) throws IOException {
 
         Path albumPath = Paths.get(uploadDir, albumName);
+        AlbumEntity entityToDelete = albumRepository.findByAlbumName(albumName);
+        AlbumDTO dtoOfDeletedAlbum = albumMapper.toDTO(entityToDelete);
+        System.out.println("Entity do delete: " + entityToDelete);
+        albumRepository.delete(entityToDelete);
 
         try (Stream<Path> paths = Files.walk(albumPath)) {
             List<Path> listOfPaths = paths.sorted(Comparator.reverseOrder()).toList();
@@ -149,14 +160,13 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
             for (Path path : listOfPaths) {
                 Files.delete(path);
             }
+
         } catch (IOException e) {
-            throw new IOException("Failed to delete file");
+            throw new IOException("Failed to delete file " + e.getMessage());
         }
 
 
-        AlbumEntity entityToDelete = albumRepository.findByAlbumName(albumName);
-        albumRepository.delete(entityToDelete);
-        return ResponseEntity.ok(albumMapper.toDTO(entityToDelete));
+        return ResponseEntity.ok(dtoOfDeletedAlbum);
     }
 
     @Transactional
@@ -221,10 +231,8 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
 
     @Override
     public AlbumDTO getAlbum(String albumName) {
+        return albumMapper.toDTO(albumRepository.findByAlbumName(albumName));
 
-        AlbumDTO album = albumMapper.toDTO(albumRepository.findByAlbumName(albumName));
-        album.setImages(getAllImagesInAlbum(albumName));
-        return album;
     }
 
     @Override

@@ -2,7 +2,9 @@ package cz.kavka.controller;
 
 import cz.kavka.dto.ArticleDTO;
 import cz.kavka.service.serviceinterface.ArticleService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +20,36 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping("/create")
-    public ArticleDTO create(@RequestBody ArticleDTO articleDTO){
+    public ArticleDTO create(@Valid @RequestBody ArticleDTO articleDTO) {
         return articleService.createArticle(articleDTO);
     }
 
     @GetMapping
-    public List<ArticleDTO> showAll(@RequestParam(required = false, defaultValue = Integer.MAX_VALUE + "") int limit){
-        return articleService.getAll(limit);
+    public List<ArticleDTO> showAll(@RequestParam(required = false, defaultValue = Integer.MAX_VALUE + "") int limit, @RequestParam(required = false, defaultValue = 0 + "") int page) {
+        return articleService.getAll(limit, page);
     }
 
     @GetMapping("/{id}")
-    public ArticleDTO show(@PathVariable Long id){
+    public ArticleDTO show(@PathVariable Long id) {
         return articleService.getArticle(id);
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping("/edit/{id}")
-    public ArticleDTO edit(@RequestBody ArticleDTO articleDTO, @PathVariable Long id){
+    public ArticleDTO edit(@Valid @RequestBody ArticleDTO articleDTO, @PathVariable Long id) {
         return articleService.editArticle(articleDTO, id);
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping("/delete/{id}")
-    public ArticleDTO remove (@PathVariable Long id){
+    public ArticleDTO remove(@PathVariable Long id) {
         return articleService.deleteArticle(id);
     }
 
     @GetMapping("/album-name/{titleImageAlbumName}")
-    public List<ArticleDTO> getArticles(@PathVariable String titleImageAlbumName){
+    public List<ArticleDTO> getArticles(@PathVariable String titleImageAlbumName) {
         return articleService.getArticles(titleImageAlbumName);
     }
 

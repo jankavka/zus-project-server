@@ -1,5 +1,6 @@
 package cz.kavka.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public class AlbumDTO {
     private String albumDescription;
 
     private List<ImageDTO> images;
+
+    @JsonProperty(value = "isHidden")
+    private boolean isHidden;
 }
