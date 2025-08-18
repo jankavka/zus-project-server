@@ -24,7 +24,7 @@ public class RequiredInformationServiceImpl implements RequiredInformationServic
 
     @Autowired
     public RequiredInformationServiceImpl(
-            @Value("${requiredinformation:file-path:data/required-information.json}") String filePath) {
+            @Value("${requiredinformation.file-path:data/required-information.json}") String filePath) {
         this.file = new File(filePath);
     }
 

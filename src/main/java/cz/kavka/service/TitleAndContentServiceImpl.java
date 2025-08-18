@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.kavka.dto.TitleAndContentDTO;
 import cz.kavka.service.serviceinterface.TitleAndContentService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -15,8 +16,15 @@ import java.util.Optional;
 @Service
 public class TitleAndContentServiceImpl implements TitleAndContentService {
 
-    private final String FILE_PATH = "data/title-and-content.json";
+    private final String FILE_PATH;
     private final ObjectMapper objectMapper= new ObjectMapper();
+    private final Object writeLock = new Object();
+
+
+    public TitleAndContentServiceImpl(
+            @Value("${title-and-content.file-path:data/title-and-content.json}" ) String filePath){
+        this.FILE_PATH = filePath;
+    }
 
     /**
      * Reads whole content from json file.
@@ -26,8 +34,9 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
     @Override
     public Map<String, TitleAndContentDTO> getContent() throws IOException{
         File file = new File(FILE_PATH);
-
-        return objectMapper.readValue(file, new TypeReference<>() {});
+        synchronized (writeLock){
+            return objectMapper.readValue(file, new TypeReference<>() {});
+        }
     }
 
     /**
@@ -38,7 +47,10 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
      */
     @Override
     public Optional<TitleAndContentDTO> getSection(String key) throws IOException{
-        return Optional.ofNullable(getContent().get(key));
+        synchronized (writeLock){
+            return Optional.ofNullable(getContent().get(key));
+        }
+
     }
 
 
@@ -52,13 +64,16 @@ public class TitleAndContentServiceImpl implements TitleAndContentService {
     @Override
     public Map<String, TitleAndContentDTO> updateContent(String key, TitleAndContentDTO titleAndContentDTO) throws IOException {
         File file = new File(FILE_PATH);
-        titleAndContentDTO.setIssuedDate(new Date());
+        synchronized (writeLock){
+            titleAndContentDTO.setIssuedDate(new Date());
 
-        Map<String, TitleAndContentDTO> content = getContent();
-        content.put(key, titleAndContentDTO);
+            Map<String, TitleAndContentDTO> content = getContent();
+            content.put(key, titleAndContentDTO);
 
-        objectMapper.writeValue(file, content);
+            objectMapper.writeValue(file, content);
 
-        return content;
+            return content;
+        }
+
     }
 }

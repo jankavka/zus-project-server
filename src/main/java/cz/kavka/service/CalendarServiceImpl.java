@@ -44,7 +44,7 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public GoogleCredentials authorize() throws IOException {
 
-        String resource = "service_account_json/rscalendar-credentials.json";
+        String resource = "service_account_json/rscalendar-credentials2.json";
 
         try (InputStream inputStream = getClass()
                 .getClassLoader()
