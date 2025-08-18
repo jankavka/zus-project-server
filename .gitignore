@@ -40,4 +40,4 @@ build/
 ### directory for uploading photos ###
 /uploads/**
 !/uploads/.gitkeep
-/src/main/resources/service_account_json/rscalendar-credentials.json
+/src/main/resources/service_account_json/rscalendar-credentials2.json

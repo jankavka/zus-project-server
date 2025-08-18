@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.kavka.dto.EntranceExamDTO;
 import cz.kavka.service.serviceinterface.EntranceExamService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -12,9 +14,16 @@ import java.util.Date;
 
 @Service
 public class EntranceExamServiceImpl implements EntranceExamService {
-    private final String filePath = "data/entrance-exam.json";
+    private final String filePath;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Object writeLock = new Object();
+
+
+    @Autowired
+    public EntranceExamServiceImpl(@Value("${entrance-exam.file-path:data/entrance-exam.json}") String filePath) {
+        this.filePath = filePath;
+
+    }
 
 
     @Override

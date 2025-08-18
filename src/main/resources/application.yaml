@@ -49,3 +49,13 @@ files:
 
 requiredinformation:
   file-path: ./data/required-information.json
+
+entrance-exam:
+  file-path: ./data/entrance-exam.json
+
+title-and-content:
+  file-path: ./data/title-and-content.json
+
+app:
+  search:
+    siteDomain: zusdh.cz
