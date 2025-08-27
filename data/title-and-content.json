@@ -31,7 +31,17 @@
   },
   "school-support": {
     "title": " podpora školy",
-    "content": "<p class=\"s2\">Mil&iacute; př&aacute;tel&eacute;,</p>\n<p class=\"s2\">pokud si v&aacute;ž&iacute;te činnosti na&scaron;&iacute; &scaron;koly a chtěli byste ji podpořit, m&aacute;te možnost učinit tak formou finančn&iacute;ho př&iacute;spěvku. Jak&aacute;koli č&aacute;stka, mal&aacute; i vět&scaron;&iacute;, n&aacute;m pomůže v rozvoji &scaron;koly, podpoře talentovan&yacute;ch ž&aacute;ků i při realizaci kulturn&iacute;ch a vzděl&aacute;vac&iacute;ch akc&iacute;.</p>\n<p class=\"s2\">Va&scaron;e podpora je pro n&aacute;s velk&yacute;m povzbuzen&iacute;m a z&aacute;vazkem i nad&aacute;le usilovat o kvalitn&iacute; a smysluplnou uměleckou v&yacute;chovu.</p>\n<p class=\"s2\">Na vyž&aacute;d&aacute;n&iacute; V&aacute;m r&aacute;di vystav&iacute;me potvrzen&iacute; o přijet&iacute; daru pro daňov&eacute; &uacute;čely. V př&iacute;padě potřeby můžeme tak&eacute; připravit darovac&iacute; smlouvu. Pro vyř&iacute;zen&iacute; n&aacute;m pros&iacute;m napi&scaron;te na e-mail:<a href=\"mailto:info@zusdh.cz\"><span class=\"s3\">info@zusdh.cz</span></a> a uveďte Va&scaron;e jm&eacute;no, adresu a př&iacute;padně IČO.</p>\n<p class=\"s2\">Děkujeme, že podporujete na&scaron;i &scaron;kolu.</p>\n<p class=\"s2\">&nbsp;</p>\n<p class=\"s2\">č&iacute;slo &uacute;čtu: 19-3756440237/0100, zpr&aacute;va pro př&iacute;jemce: dar &scaron;kole</p>",
-    "issuedDate": 1752766305768
+    "content": "<p class=\"s2\">Mil&iacute; př&aacute;tel&eacute;,</p>\n<p class=\"s2\">pokud si v&aacute;ž&iacute;te činnosti na&scaron;&iacute; &scaron;koly a chtěli byste ji podpořit, m&aacute;te možnost učinit tak formou finančn&iacute;ho př&iacute;spěvku. Jak&aacute;koli č&aacute;stka, mal&aacute; i vět&scaron;&iacute;, n&aacute;m pomůže v rozvoji &scaron;koly, podpoře talentovan&yacute;ch ž&aacute;ků i při realizaci kulturn&iacute;ch a vzděl&aacute;vac&iacute;ch akc&iacute;.</p>\n<p class=\"s2\">Va&scaron;e podpora je pro n&aacute;s velk&yacute;m povzbuzen&iacute;m a z&aacute;vazkem i nad&aacute;le usilovat o kvalitn&iacute; a smysluplnou uměleckou v&yacute;chovu.</p>\n<p class=\"s2\">Na vyž&aacute;d&aacute;n&iacute; V&aacute;m r&aacute;di vystav&iacute;me potvrzen&iacute; o přijet&iacute; daru pro daňov&eacute; &uacute;čely. V př&iacute;padě potřeby můžeme tak&eacute; připravit darovac&iacute; smlouvu. Pro vyř&iacute;zen&iacute; n&aacute;m pros&iacute;m napi&scaron;te na e-mail:<a href=\"mailto:info@zusdh.cz\"><span class=\"s3\">info@zusdh.cz</span></a> a uveďte Va&scaron;e jm&eacute;no, adresu a př&iacute;padně IČO.</p>\n<p class=\"s2\">Děkujeme, že podporujete na&scaron;i &scaron;kolu.</p>\n<p class=\"s2\">č&iacute;slo &uacute;čtu: 19-3756440237/0100, zpr&aacute;va pro př&iacute;jemce: dar &scaron;kole</p>\n<p class=\"s2\"><img src=\"http://localhost:8080/uploads/skryte/6d84c4da-947b-4525-ab13-1c10e9005c45_qr,%20dar%20s%CC%8Ckole.png\" alt=\"\" width=\"200\" height=\"219\"></p>",
+    "issuedDate": 1755595111830
+  },
+  "anual-report": {
+    "title": "sss",
+    "content": "<p>sss</p>",
+    "issuedDate": 1756114098330
+  },
+  "school-education-program": {
+    "title": " školní vzdělávací program",
+    "content": "<p>test</p>",
+    "issuedDate": 1756295598184
   }
 }
