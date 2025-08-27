@@ -17,7 +17,7 @@ spring:
       max-request-size: 10MB
 
 file:
-  upload-dir: uploads
+  upload-dir: ${FILE_UPLOADS_DIR:uploads}
 
   jackson:
     mapper:
