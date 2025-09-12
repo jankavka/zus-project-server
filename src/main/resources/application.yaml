@@ -26,6 +26,7 @@ file:
 server:
   address: 0.0.0.0
   port: 8080
+  forward-headers-strategy: framework
 
 youtube:
   api:
@@ -59,3 +60,4 @@ title-and-content:
 app:
   search:
     siteDomain: zusdh.cz
+
