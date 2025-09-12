@@ -3,26 +3,20 @@
 services:
   frontend:
     build:
-<<<<<<< HEAD
       context: ../../React/zus-project-client
       dockerfile: Dockerfile
-=======
-      context: ../zus-project-client
-      dockerfile: Dockerfile   # multi-stage that ends on nginx
->>>>>>> 496f35c (Configs update)
+   # multi-stage that ends on nginx
+
     container_name: zus-frontend
     depends_on:
       - backend
     ports:
       - "80:80"
-<<<<<<< HEAD
-=======
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
       - /etc/ssl/local:/etc/ssl/local:ro
-      - ./uploads:/usr/share/nginx/uploads:ro 
->>>>>>> 496f35c (Configs update)
+      - ./uploads:/usr/share/nginx/uploads:ro
 
 
 
@@ -33,11 +27,7 @@ services:
       - ./data:/app/data
       - ./uploads:/app/uploads
     #ports:
-<<<<<<< HEAD
       #- "8080:8080"
-=======
-    #  - "8080:8080"
->>>>>>> 496f35c (Configs update)
     expose:
       - "8080"
     depends_on:
