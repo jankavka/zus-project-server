@@ -1,14 +1,28 @@
 
 
 services:
+  frontend:
+    build:
+      context: ../../React/zus-project-client
+      dockerfile: Dockerfile
+    container_name: zus-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+
+
   backend:
     build: .
     container_name: zus-backend
     volumes:
       - ./data:/app/data
       - ./uploads:/app/uploads
-    ports:
-      - "8080:8080"
+    #ports:
+      #- "8080:8080"
+    expose:
+      - "8080"
     depends_on:
       db:
         condition: service_healthy
@@ -16,7 +30,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/zusProjectServer
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: secret
-      FILE_UPLOAD_DIR: /app/uploads
+      FILE_UPLOADS_DIR: /app/uploads
 
 
   db:
@@ -31,7 +45,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-psecret" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-psecret" ]
       interval: 10s
       timeout: 5s
       retries: 10
