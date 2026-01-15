@@ -6,7 +6,7 @@ import cz.kavka.entity.TeachersEntity;
 import cz.kavka.entity.repository.TeachersRepository;
 import cz.kavka.service.serviceinterface.TeachersService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,17 +14,12 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class TeachersServiceImpl implements TeachersService {
 
     private final TeachersMapper teachersMapper;
 
     private final TeachersRepository teachersRepository;
-
-    @Autowired
-    public TeachersServiceImpl(TeachersRepository teachersRepository, TeachersMapper teachersMapper) {
-        this.teachersRepository = teachersRepository;
-        this.teachersMapper = teachersMapper;
-    }
 
     @Transactional
     @Override

@@ -6,7 +6,7 @@ import cz.kavka.entity.SchoolManagementEntity;
 import cz.kavka.entity.repository.SchoolManagementRepository;
 import cz.kavka.service.serviceinterface.SchoolManagementService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,17 +14,12 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class SchoolManagementServiceImpl implements SchoolManagementService {
 
     private final SchoolManagementMapper schoolManagementMapper;
 
     private final SchoolManagementRepository schoolManagementRepository;
-
-    @Autowired
-    public SchoolManagementServiceImpl(SchoolManagementRepository schoolManagementRepository, SchoolManagementMapper schoolManagementMapper) {
-        this.schoolManagementRepository = schoolManagementRepository;
-        this.schoolManagementMapper = schoolManagementMapper;
-    }
 
     @Transactional
     @Override
