@@ -6,6 +6,7 @@ import cz.kavka.entity.FileEntity;
 import cz.kavka.entity.repository.FileRepository;
 import cz.kavka.service.serviceinterface.FileService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ import java.text.Normalizer;
 import java.util.List;
 
 @Service
+@Slf4j
 public class FileServiceImpl implements FileService {
 
     private final String filePathString;
@@ -78,8 +80,6 @@ public class FileServiceImpl implements FileService {
 
         String normalizedFileName = normalizeFileName(fileName);
 
-        System.out.println(normalizedFileName);
-
         synchronized (writeLock) {
             File file = new File(filePathString, normalizedFileName);
             FileUtils.copyInputStreamToFile(pdf.getInputStream(), file);
@@ -101,7 +101,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public ResponseEntity<HttpStatus> deleteFile(Long id) throws IOException {
         FileEntity entityToDelete = fileRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        System.out.println("Path to delete: " + filePathString + File.separator + entityToDelete.getNormalizedFileName());
+        log.info("Path to delete: {}{}{}", filePathString, File.separator, entityToDelete.getNormalizedFileName());
 
         synchronized (writeLock) {
             File fileToDelete = new File(filePathString, entityToDelete.getNormalizedFileName());

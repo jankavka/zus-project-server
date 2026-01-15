@@ -22,10 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -151,7 +148,7 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
         Path albumPath = Paths.get(uploadDir, albumName);
         AlbumEntity entityToDelete = albumRepository.findByAlbumName(albumName);
         AlbumDTO dtoOfDeletedAlbum = albumMapper.toDTO(entityToDelete);
-        System.out.println("Entity do delete: " + entityToDelete);
+        log.info("Entity do delete: {}", entityToDelete);
         albumRepository.delete(entityToDelete);
 
         try (Stream<Path> paths = Files.walk(albumPath)) {

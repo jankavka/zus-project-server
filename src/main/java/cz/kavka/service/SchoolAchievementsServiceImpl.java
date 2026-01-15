@@ -7,7 +7,7 @@ import cz.kavka.entity.repository.SchoolAchievementsRepository;
 import cz.kavka.entity.repository.SchoolYearRepository;
 import cz.kavka.service.serviceinterface.SchoolAchievementsService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +15,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class SchoolAchievementsServiceImpl implements SchoolAchievementsService {
 
     private final SchoolAchievementsRepository schoolAchievementsRepository;
@@ -23,17 +24,6 @@ public class SchoolAchievementsServiceImpl implements SchoolAchievementsService 
 
     private final SchoolYearRepository schoolYearRepository;
 
-
-    @Autowired
-    public SchoolAchievementsServiceImpl(
-            SchoolAchievementsRepository schoolAchievementsRepository,
-            SchoolAchievementsMapper schoolAchievementsMapper,
-            SchoolYearRepository schoolYearRepository) {
-        this.schoolAchievementsMapper = schoolAchievementsMapper;
-        this.schoolAchievementsRepository = schoolAchievementsRepository;
-        this.schoolYearRepository = schoolYearRepository;
-
-    }
 
 
     @Transactional
