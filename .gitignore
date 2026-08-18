@@ -40,6 +40,18 @@ build/
 ### directory for uploading photos ###
 /uploads/**
 !/uploads/.gitkeep
+
+### local dev secrets ###
+.env
+
+### local dev compose override (auto-loaded by `docker compose` — must not land on the droplet) ###
+docker-compose.override.yml
+
+### local Claude Code guidance, not shared with the team ###
+CLAUDE.md
 /src/main/resources/service_account_json/rscalendar-credentials2.json
 /data/pdf_files/**
 backup.sql
+
+### DB dumps contain real user emails/password hashes ###
+zus_dump.sql

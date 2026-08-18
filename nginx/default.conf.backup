@@ -83,6 +83,13 @@ server {
    proxy_redirect off;
   }
 
+  # location /uploads/ {
+  #alias /usr/share/nginx/uploads/;   # alias, ne root
+  #try_files $uri =404;
+  #add_header Cache-Control "public, max-age=31536000, immutable";
+  #}
+
+
   # ---- SPA fallback (keeps /admin etc. working) ----
   location / {
     try_files $uri $uri/ /index.html;
