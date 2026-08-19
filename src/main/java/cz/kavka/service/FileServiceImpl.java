@@ -101,7 +101,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public ResponseEntity<HttpStatus> deleteFile(Long id) throws IOException {
         FileEntity entityToDelete = fileRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        log.info("Path to delete: {}{}{}", filePathString, File.separator, entityToDelete.getNormalizedFileName());
 
         synchronized (writeLock) {
             File fileToDelete = new File(filePathString, entityToDelete.getNormalizedFileName());

@@ -148,7 +148,6 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
         Path albumPath = Paths.get(uploadDir, albumName);
         AlbumEntity entityToDelete = albumRepository.findByAlbumName(albumName);
         AlbumDTO dtoOfDeletedAlbum = albumMapper.toDTO(entityToDelete);
-        log.info("Entity do delete: {}", entityToDelete);
         albumRepository.delete(entityToDelete);
 
         try (Stream<Path> paths = Files.walk(albumPath)) {
@@ -175,7 +174,7 @@ public class PhotoAndAlbumServiceImpl implements PhotoAndAlbumService {
         try {
             Files.delete(imagePath);
         } catch (IOException e) {
-            log.info("Error: {}", e.getMessage());
+            log.error("Error: {}", e.getMessage());
             throw new IOException("Internal server error. Image wasn't deleted.", e);
         }
 
