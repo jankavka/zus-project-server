@@ -47,7 +47,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/zusProjectServer?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&characterEncoding=utf8
       SPRING_DATASOURCE_USERNAME: zus
-      SPRING_DATASOURCE_PASSWORD: kttv@oiK&y9z9
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       FILE_UPLOADS_DIR: /app/uploads
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
@@ -60,12 +60,12 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: zusProjectServer
-      MYSQL_ROOT_PASSWORD: kttv@oiK&y9z9
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
-      - db_backups:/backups 
+      - db_backups:/backups
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-psecret" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD}" ]
       interval: 10s
       timeout: 5s
       retries: 10
