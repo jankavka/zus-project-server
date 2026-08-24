@@ -12,6 +12,9 @@ spring:
 file:
   upload-dir: ${FILE_UPLOADS_DIR:uploads}
 
+carousel:
+  upload-dir: ${CAROUSEL_UPLOADS_DIR:carousel-photos}
+
   jackson:
     mapper:
       accept-case-insensitive-enums: true

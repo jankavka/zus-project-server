@@ -54,6 +54,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./uploads:/app/uploads
+      - ./carousel-photos:/app/carousel-photos
     expose:
       - "8080"
     depends_on:
@@ -64,6 +65,7 @@ services:
       SPRING_DATASOURCE_USERNAME: zus
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       FILE_UPLOADS_DIR: /app/uploads
+      CAROUSEL_UPLOADS_DIR: /app/carousel-photos
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate

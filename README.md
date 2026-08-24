@@ -32,6 +32,7 @@ zus-project-server/
 │   └── service_account_json/  # Google API credentials
 ├── data/                  # JSON data and PDF files
 ├── uploads/               # Uploaded files (photos)
+├── carousel-photos/       # Uploaded carousel photos
 ├── nginx/                 # Nginx reverse proxy configuration
 ├── docker-compose.yml
 ├── Dockerfile
@@ -51,6 +52,7 @@ zus-project-server/
 | `AlbumEntity` | Photo albums |
 | `ImageEntity` | Photos in albums |
 | `FileEntity` | PDF documents |
+| `CarouselPhotoEntity` | Photos shown in the frontend carousel |
 
 ## API Endpoints
 
@@ -98,6 +100,12 @@ zus-project-server/
 - `POST /api/photos/add-photos` - Upload photos (ADMIN)
 - `DELETE /api/photos/delete-album/{albumName}` - Delete album (ADMIN)
 - `DELETE /api/photos/delete-image/{id}` - Delete photo (ADMIN)
+
+### Carousel Photos
+- `GET /api/carousel-photos` - List carousel photos
+- `POST /api/carousel-photos` - Upload one or more photos; optional `names[]` per file, defaults to original filename (ADMIN)
+- `PUT /api/carousel-photos/{id}/visibility` - Toggle photo visibility (`isHidden`) (ADMIN)
+- `DELETE /api/carousel-photos/{id}` - Delete photo (ADMIN)
 
 ### Files (PDF)
 - `GET /api/files` - List files
@@ -187,7 +195,7 @@ google:
 ## Data Storage
 
 **Database (MySQL):**
-- Users, articles, teachers, management, school years, achievements, albums, photos, files
+- Users, articles, teachers, management, school years, achievements, albums, photos, files, carousel photos
 
 **JSON Files:**
 - `/data/basic-data.json` - school basic data
@@ -197,6 +205,7 @@ google:
 
 **File System:**
 - `/uploads/` - uploaded photos (organized by album)
+- `/carousel-photos/` - uploaded carousel photos
 - `/data/pdf_files/` - PDF documents
 
 ## Database Migrations

@@ -1,0 +1,30 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 0002-carousel_photo_entity
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: carousel_photo_entity
+      changes:
+        - createTable:
+            tableName: carousel_photo_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: photo_url
+                  type: VARCHAR(255)
+              - column:
+                  name: is_hidden
+                  type: BIT(1)

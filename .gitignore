@@ -41,6 +41,10 @@ build/
 /uploads/**
 !/uploads/.gitkeep
 
+### directory for uploading carousel photos ###
+/carousel-photos/**
+!/carousel-photos/.gitkeep
+
 ### local dev secrets ###
 .env
 

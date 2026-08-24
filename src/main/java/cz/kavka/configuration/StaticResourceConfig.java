@@ -13,11 +13,17 @@ public class StaticResourceConfig implements WebMvcConfigurer {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
+    @Value("${carousel.upload-dir}")
+    private String carouselUploadDir;
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations("file:" + Paths.get(uploadDir).toAbsolutePath() + "/");
+
+        registry.addResourceHandler("/carousel-photos/**")
+                .addResourceLocations("file:" + Paths.get(carouselUploadDir).toAbsolutePath() + "/");
     }
 
 
