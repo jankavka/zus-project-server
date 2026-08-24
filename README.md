@@ -6,6 +6,7 @@ REST API backend for a Czech Basic Art School (Základní umělecká škola) web
 
 - **Java 21** + **Spring Boot 3.4.3**
 - **Spring Data JPA** with Hibernate ORM
+- **Liquibase** for database schema migrations
 - **MySQL 8.0**
 - **Spring Security** with BCrypt encryption
 - **Google Calendar API** & **YouTube API**
@@ -27,6 +28,7 @@ zus-project-server/
 │   └── service/           # Business logic
 ├── src/main/resources/
 │   ├── application.yaml   # Application configuration
+│   ├── db/changelog/      # Liquibase migrations
 │   └── service_account_json/  # Google API credentials
 ├── data/                  # JSON data and PDF files
 ├── uploads/               # Uploaded files (photos)
@@ -196,6 +198,10 @@ google:
 **File System:**
 - `/uploads/` - uploaded photos (organized by album)
 - `/data/pdf_files/` - PDF documents
+
+## Database Migrations
+
+Schema changes are managed by Liquibase, not Hibernate auto-DDL (`spring.jpa.hibernate.ddl-auto` is set to `validate`, which only checks the schema at startup). Changelogs live under `src/main/resources/db/changelog/`, included from `db.changelog-master.yaml`. To change the schema, add a new changeset file under `db/changelog/changes/` and include it in the master changelog — never edit an already-released changeset.
 
 ## License
 
