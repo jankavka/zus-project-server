@@ -1,0 +1,316 @@
+databaseChangeLog:
+
+  # Baseline changelog capturing the production schema as it exists today (see zus_dump.sql).
+  # Each changeSet is guarded so it only actually runs against a fresh database - on the
+  # existing production database (where these tables already exist) it is marked as ran
+  # without executing, so no manual changelog-sync step is needed on deploy.
+
+  - changeSet:
+      id: 0001-album_entity
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: album_entity
+      changes:
+        - createTable:
+            tableName: album_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: album_description
+                  type: VARCHAR(255)
+              - column:
+                  name: album_name
+                  type: VARCHAR(255)
+              - column:
+                  name: is_hidden
+                  type: BIT(1)
+              - column:
+                  name: lead_picture_url
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: 0001-article
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: article
+      changes:
+        - createTable:
+            tableName: article
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: content
+                  type: TEXT
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: issued_date
+                  type: DATE
+              # Leftover from an older ArticleEntity revision, no longer mapped by the entity.
+              # Kept as-is in the baseline; a follow-up changeset will drop it.
+              - column:
+                  name: title_image_url
+                  type: VARCHAR(255)
+              # Leftover @ManyToOne ImageEntity relation, no longer mapped by the entity - the
+              # referenced ids no longer exist in image_entity, which is why production never
+              # had a real FK constraint here, only this index.
+              - column:
+                  name: image_id
+                  type: BIGINT
+              - column:
+                  name: image_url
+                  type: VARCHAR(255)
+        - createIndex:
+            tableName: article
+            indexName: FK4wdctf2cgjwgps31rt9agdkpa
+            columns:
+              - column:
+                  name: image_id
+
+  - changeSet:
+      id: 0001-file_entity
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: file_entity
+      changes:
+        - createTable:
+            tableName: file_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: VARCHAR(255)
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  name: normalized_file_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 0001-image_entity
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: image_entity
+      changes:
+        - createTable:
+            tableName: image_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: VARCHAR(255)
+              - column:
+                  name: url
+                  type: VARCHAR(255)
+              - column:
+                  name: album_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: FKjya3i5m2x9uoigydi9eh489os
+                    references: album_entity(id)
+
+  - changeSet:
+      id: 0001-school_year
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: school_year
+      changes:
+        - createTable:
+            tableName: school_year
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: school_year
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: 0001-school_achievements
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: school_achievements
+      changes:
+        - createTable:
+            tableName: school_achievements
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: content
+                  type: TEXT
+              - column:
+                  name: issued_date
+                  type: DATE
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: school_year
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: FKjogbaoqpkgg4xpukw1fuga3m4
+                    references: school_year(id)
+
+  - changeSet:
+      id: 0001-school_management
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: school_management
+      changes:
+        - createTable:
+            tableName: school_management
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: degree
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: tel_number
+                  type: VARCHAR(255)
+              - column:
+                  name: issued_date
+                  type: DATE
+              - column:
+                  name: management_type
+                  type: "ENUM('deputyDirector','director')"
+
+  - changeSet:
+      id: 0001-teachers
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: teachers
+      changes:
+        - createTable:
+            tableName: teachers
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: degree
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: tel_number
+                  type: VARCHAR(255)
+              - column:
+                  name: issued_date
+                  type: DATE
+
+  - changeSet:
+      id: 0001-user_entity
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: user_entity
+      changes:
+        - createTable:
+            tableName: user_entity
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: admin
+                  type: BIT(1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
