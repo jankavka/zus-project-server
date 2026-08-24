@@ -24,27 +24,27 @@ public class BasicDataDTO {
 
     private String webSite;
 
-    //zjistit jestli je třeba když je normální adresa
+    //check whether this is still needed given the regular address above
     private String mailingAddress;
 
-    //elektronická adresa podatelny
+    //electronic mailroom (podatelna) address
     private String emailMailingAddress;
 
-    //IČO
+    //IČO (Czech company identification number)
     private String identificationNumber;
 
-    //DIČ
+    //DIČ (Czech tax identification number)
     private String taxIdentificationNumber;
 
     private String deputyDirector;
 
-    //"zřizovatel"
+    //the school's founding/establishing body
     private String founder;
 
-    //REDIZO
+    //REDIZO (national school register identifier)
     private Integer idNumber;
 
-    //IZO
+    //IZO (school facility identification number)
     private Integer organizationIdentificationMark;
 
     private String dataBox;
