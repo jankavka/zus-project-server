@@ -78,6 +78,8 @@ services:
     environment:
       MYSQL_DATABASE: zusProjectServer
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: zus
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
       - db_backups:/backups
