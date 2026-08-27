@@ -58,7 +58,7 @@ class FileServiceImplTest {
         assertThat(resp.getStatusCode().is2xxSuccessful()).isTrue();
         assertThat(resp.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_PDF);
         assertThat(resp.getHeaders().getFirst("Content-Disposition"))
-                .isEqualTo("inline; filename=doc.pdf");
+                .isEqualTo("inline; filename=\"doc.pdf\"");
         assertThat(resp.getBody()).isEqualTo(pdf);
     }
 

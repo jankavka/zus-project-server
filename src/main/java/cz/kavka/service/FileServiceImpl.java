@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -61,9 +62,15 @@ public class FileServiceImpl implements FileService {
 
         byte[] pdf = Files.readAllBytes(target);
 
+        // "inline" so the browser opens the PDF (new tab) instead of downloading it;
+        // the filename is quoted so names with spaces/diacritics can't produce a
+        // malformed header that makes some browsers fall back to "attachment".
+        ContentDisposition disposition = ContentDisposition.inline()
+                .filename(fileName)
+                .build();
+
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName)
-                //Also header
+                .header(HttpHeaders.CONTENT_DISPOSITION, disposition.toString())
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdf);
     }
