@@ -5,6 +5,10 @@ services:
     build:
       context: ../zus-project-client
       dockerfile: Dockerfile
+      args:
+        # Baked into the JS bundle at build time (Vite). Value comes from the
+        # .env file next to this compose file. Changing it needs a rebuild.
+        VITE_GOOGLE_CSE_ID: ${VITE_GOOGLE_CSE_ID}
    # multi-stage that ends on nginx
 
     container_name: zus-frontend
