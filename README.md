@@ -56,6 +56,9 @@ zus-project-server/
 
 ## API Endpoints
 
+### Health
+- `GET /` / `GET /api` - Plain-text health check ("OK, Backend works")
+
 ### Authentication
 - `POST /api/user` - Register user
 - `POST /api/auth` - Login
@@ -65,6 +68,7 @@ zus-project-server/
 ### Articles
 - `GET /api/articles` - List articles (paginated)
 - `GET /api/articles/{id}` - Article details
+- `GET /api/articles/album-name/{titleImageAlbumName}` - Articles whose title image is in the given album
 - `POST /api/articles/create` - Create article (ADMIN)
 - `PUT /api/articles/edit/{id}` - Update article (ADMIN)
 - `DELETE /api/articles/delete/{id}` - Delete article (ADMIN)
@@ -84,6 +88,7 @@ zus-project-server/
 
 ### School Years
 - `GET /api/school-year` - List school years
+- `GET /api/school-year/{id}` - School year details
 - `POST /api/school-year/create` - Create year (ADMIN)
 - `DELETE /api/school-year/{id}` - Delete year (ADMIN)
 
@@ -95,9 +100,14 @@ zus-project-server/
 
 ### Photo Gallery
 - `GET /api/photos/get-albums` - List albums
+- `GET /api/photos/all-albums-names` - List album names only
+- `GET /api/photos/get-album/{albumName}` - Album details
 - `GET /api/photos/get-images/{albumName}` - Photos in album
+- `GET /api/photos/get-one-image/{albumName}` - Single (cover) image of an album
+- `GET /api/photos/search` - Search albums
 - `POST /api/photos/new-album` - Create album (ADMIN)
 - `POST /api/photos/add-photos` - Upload photos (ADMIN)
+- `PUT /api/photos/edit-album/{albumName}` - Update album (ADMIN)
 - `DELETE /api/photos/delete-album/{albumName}` - Delete album (ADMIN)
 - `DELETE /api/photos/delete-image/{id}` - Delete photo (ADMIN)
 
@@ -109,18 +119,28 @@ zus-project-server/
 
 ### Files (PDF)
 - `GET /api/files` - List files
-- `GET /api/files/{fileName}` - Download file
+- `GET /api/files/section/{section}` - List files in a section
+- `GET /api/files/{fileName}` - Serve file inline (PDF)
 - `POST /api/files` - Upload file (ADMIN)
 - `DELETE /api/files/{id}` - Delete file (ADMIN)
 
 ### Static Content
 - `GET /api/static/basic-data` - School basic information
+- `POST /api/static/basic-data/create-or-edit` - Update basic information (ADMIN)
 - `GET /api/static/required-info` - Required public information
+- `POST /api/static/required-info/create-or-edit` - Update required information (ADMIN)
+- `GET /api/static/keys` - List available content keys
 - `GET /api/static/{key}` - Page content by key
 - `PUT /api/static/update/{key}` - Update content (ADMIN)
 
+### Entrance Exam
+- `GET /api/entrance-exam` - Entrance exam info
+- `GET /api/entrance-exam/is-hidden` - Whether the entrance exam block is hidden
+- `POST /api/entrance-exam` - Update entrance exam info (ADMIN)
+
 ### Calendar and YouTube
-- `GET /api/calendar/events` - Google Calendar events
+- `GET /api/calendar/events` - Upcoming Google Calendar events
+- `GET /api/calendar/all-events` - All Google Calendar events
 - `GET /api/youtube/videos` - YouTube channel videos
 
 ### Search
@@ -128,10 +148,11 @@ zus-project-server/
 
 ## Security
 
-- Email/password authentication with BCrypt hashing
+- Session-based (servlet container-managed) email/password authentication with BCrypt hashing
 - Roles: `ROLE_USER`, `ROLE_ADMIN`
+- `ApplicationSecurityConfiguration` `permitAll()`s the whole filter chain (CSRF disabled);
+  actual protection is per-endpoint method-level security (`@Secured("ROLE_ADMIN")`)
 - All modification operations require `ROLE_ADMIN`
-- Method-level security using `@Secured` annotations
 
 ## Getting Started
 
@@ -151,46 +172,55 @@ mvn clean package
 docker-compose up
 
 # Or run JAR directly
-java -jar target/zusProjectServer-0.0.1-SNAPSHOT.jar
+java -jar target/zus-project-server-0.0.1-SNAPSHOT.jar
 ```
 
 ### Docker Compose Services
 
 | Service | Port | Description |
 |---------|------|-------------|
-| frontend | 80, 443 | React app (Nginx) |
-| backend | 8080 | Spring Boot API |
-| db | 3306 | MySQL database |
+| frontend | 80, 443 | React app + Nginx reverse proxy (also proxies `/api` and `/uploads` to the backend) |
+| backend | 8080 (internal `expose` only) | Spring Boot API |
+| db | 3306 | MySQL 8.0 database |
+| certbot | – | Let's Encrypt certificate renewal |
 
 ## Configuration
 
-Main configuration is in `src/main/resources/application.yaml`:
+`src/main/resources/application.yaml` holds the static config (JPA, multipart limits,
+JSON file paths, hardcoded YouTube API key/channel, `app.search.siteDomain`). It does
+**not** contain a datasource block — the DB connection is supplied entirely through
+environment variables (see `docker-compose.yml`).
 
-```yaml
-spring:
-  datasource:
-    url: jdbc:mysql://db:3306/zusProjectServer
-    username: root
-    password: ${DB_PASSWORD}
+Environment variables (set via `.env` / `docker-compose.override.yml`, both gitignored):
 
-youtube:
-  api-key: ${YOUTUBE_API_KEY}
-  channel-id: ${YOUTUBE_CHANNEL_ID}
+| Variable | Used by | Notes |
+|----------|---------|-------|
+| `DB_PASSWORD` | backend + db | Password for the MySQL `zus` user |
+| `MYSQL_ROOT_PASSWORD` | db | MySQL root password |
+| `SPRING_DATASOURCE_URL` / `_USERNAME` / `_PASSWORD` | backend | Set in `docker-compose.yml`; username is `zus`, not `root` |
+| `FILE_UPLOADS_DIR` | backend | Photo upload dir (default `uploads`) |
+| `CAROUSEL_UPLOADS_DIR` | backend | Carousel photo dir (default `carousel-photos`) |
+| `VITE_GOOGLE_CSE_ID` | frontend build | Google Custom Search Engine id, baked into the JS bundle |
 
-google:
-  calendar:
-    calendar-id: ${GOOGLE_CALENDAR_ID}
-```
+> A fresh local MySQL volume also needs `MYSQL_USER=zus` / `MYSQL_PASSWORD` (via
+> `docker-compose.override.yml`), otherwise the backend gets "access denied" — the
+> base `docker-compose.yml` provisions that user, but a pre-existing volume from an
+> older setup may not have it.
 
 ## Integrations
 
 ### Google Calendar
-- Fetches events from Google Calendar
-- OAuth2 credentials stored in `service_account_json/`
+- Fetches events from the fixed calendar `akce@zusdh.cz`
+- Uses a **service-account** JSON at `src/main/resources/service_account_json/rscalendar-credentials2.json`
+  (gitignored, not in the repo — calendar endpoints fail without it)
 
 ### YouTube
-- Fetches videos from school's YouTube channel
-- Requires API key and channel ID configuration
+- Fetches videos from the school's YouTube channel
+- API key and channel id are hardcoded in `application.yaml` (`youtube.api.key` / `youtube.api.channel-id`), no OAuth
+
+### Google Custom Search
+- `GET /search?query=...` (`SiteSearchController`) redirects to a Google `site:zusdh.cz` search
+- The frontend also uses a Google CSE widget configured with `VITE_GOOGLE_CSE_ID` at build time
 
 ## Data Storage
 
@@ -211,6 +241,15 @@ google:
 ## Database Migrations
 
 Schema changes are managed by Liquibase, not Hibernate auto-DDL (`spring.jpa.hibernate.ddl-auto` is set to `validate`, which only checks the schema at startup). Changelogs live under `src/main/resources/db/changelog/`, included from `db.changelog-master.yaml`. To change the schema, add a new changeset file under `db/changelog/changes/` and include it in the master changelog — never edit an already-released changeset.
+
+## Deployment
+
+`.github/workflows/deploy.yml` runs on every push to `main` (and on manual dispatch):
+
+1. **test** job - `mvn -B test` on Temurin JDK 21
+2. **deploy** job (needs `test`) - SSHes into the Hetzner host and runs `~/apps/deploy.sh`
+
+Requires the repo secrets `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`.
 
 ## License
 
