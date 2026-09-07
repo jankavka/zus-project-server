@@ -13,12 +13,15 @@ import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
 import cz.kavka.service.serviceinterface.CalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
@@ -30,19 +33,38 @@ public class CalendarServiceImpl implements CalendarService {
     //HttpTransport instance needed for Calendar.Builder constructor
     private final HttpTransport httpTransport;
 
+    /**
+     * Raw service-account JSON, injected on the server via the
+     * {@code GOOGLE_CALENDAR_CREDENTIALS_JSON} environment variable (GitHub secret).
+     * When blank (e.g. local dev) the classpath resource is used instead.
+     */
+    @Value("${google.calendar.credentials-json:}")
+    private String credentialsJson;
+
     @Autowired
     public CalendarServiceImpl(HttpTransport httpTransport){
         this.httpTransport = httpTransport;
     }
 
     /**
-     * Creates credentials form JSON file
+     * Creates credentials either from the {@code GOOGLE_CALENDAR_CREDENTIALS_JSON}
+     * environment variable (production) or, as a fallback, from a JSON file on the
+     * classpath (local dev).
      *
      * @return GoogleCredentials representation of credentials for access Google Calendar API
-     * @throws IOException while an error occurs during file operations
+     * @throws IOException while an error occurs during reading the credentials
      */
     @Override
     public GoogleCredentials authorize() throws IOException {
+
+        if (credentialsJson != null && !credentialsJson.isBlank()) {
+            try (InputStream inputStream = new ByteArrayInputStream(
+                    credentialsJson.getBytes(StandardCharsets.UTF_8))) {
+                return GoogleCredentials
+                        .fromStream(inputStream)
+                        .createScoped(CalendarScopes.all());
+            }
+        }
 
         String resource = "service_account_json/rscalendar-credentials2.json";
 
@@ -51,7 +73,10 @@ public class CalendarServiceImpl implements CalendarService {
                 .getResourceAsStream(resource)) {
 
             if (inputStream == null) {
-                throw new FileNotFoundException("File not found");
+                throw new FileNotFoundException(
+                        "Google Calendar credentials not found: set the "
+                                + "GOOGLE_CALENDAR_CREDENTIALS_JSON environment variable "
+                                + "or add " + resource + " to the classpath");
             }
             return GoogleCredentials
                     .fromStream(inputStream)

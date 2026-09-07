@@ -201,6 +201,7 @@ Environment variables (set via `.env` / `docker-compose.override.yml`, both giti
 | `FILE_UPLOADS_DIR` | backend | Photo upload dir (default `uploads`) |
 | `CAROUSEL_UPLOADS_DIR` | backend | Carousel photo dir (default `carousel-photos`) |
 | `VITE_GOOGLE_CSE_ID` | frontend build | Google Custom Search Engine id, baked into the JS bundle |
+| `GOOGLE_CALENDAR_CREDENTIALS_JSON` | backend | Raw service-account JSON for the Google Calendar API; required in production (see Integrations) |
 
 > A fresh local MySQL volume also needs `MYSQL_USER=zus` / `MYSQL_PASSWORD` (via
 > `docker-compose.override.yml`), otherwise the backend gets "access denied" — the
@@ -211,8 +212,15 @@ Environment variables (set via `.env` / `docker-compose.override.yml`, both giti
 
 ### Google Calendar
 - Fetches events from the fixed calendar `akce@zusdh.cz`
-- Uses a **service-account** JSON at `src/main/resources/service_account_json/rscalendar-credentials2.json`
-  (gitignored, not in the repo — calendar endpoints fail without it)
+- Handles both timed and all-day events
+- Credentials are resolved in this order (`CalendarServiceImpl.authorize`):
+  1. `GOOGLE_CALENDAR_CREDENTIALS_JSON` env var — the raw service-account JSON.
+     Set this in production via the `.env` file next to `docker-compose.yml`
+     (Compose passes it through to the backend). Preferred, since the file is gitignored.
+  2. Fallback: a **service-account** JSON on the classpath at
+     `src/main/resources/service_account_json/rscalendar-credentials2.json`
+     (gitignored — used for local dev).
+- With neither present, `/api/calendar/*` returns 500.
 
 ### YouTube
 - Fetches videos from the school's YouTube channel

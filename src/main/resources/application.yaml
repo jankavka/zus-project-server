@@ -29,6 +29,13 @@ youtube:
     key: AIzaSyBnoAupUJ6oVyeEgnFKuMzOQ-R4XBxXZDk
     channel-id: UCqFOHLSg-jmCS__QRZgmqXw
 
+google:
+  calendar:
+    # Raw service-account JSON. On the server this comes from the
+    # GOOGLE_CALENDAR_CREDENTIALS_JSON env var (GitHub secret); locally it is
+    # left blank and the classpath file service_account_json/rscalendar-credentials2.json is used.
+    credentials-json: ${GOOGLE_CALENDAR_CREDENTIALS_JSON:}
+
 debug: false
 
 logging:

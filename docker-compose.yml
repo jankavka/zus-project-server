@@ -70,6 +70,10 @@ services:
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       FILE_UPLOADS_DIR: /app/uploads
       CAROUSEL_UPLOADS_DIR: /app/carousel-photos
+      # Raw Google service-account JSON for the calendar API. Provide it via the
+      # .env file next to this compose file (single line, or use a heredoc/quoted
+      # multiline value). Without it the /api/calendar/* endpoints return 500.
+      GOOGLE_CALENDAR_CREDENTIALS_JSON: ${GOOGLE_CALENDAR_CREDENTIALS_JSON:-}
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL8Dialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: validate
