@@ -34,9 +34,10 @@ public class CalendarServiceImpl implements CalendarService {
     private final HttpTransport httpTransport;
 
     /**
-     * Raw service-account JSON, injected on the server via the
-     * {@code GOOGLE_CALENDAR_CREDENTIALS_JSON} environment variable (GitHub secret).
-     * When blank (e.g. local dev) the classpath resource is used instead.
+     * Raw service-account JSON. In production it is supplied through the
+     * {@code GOOGLE_CALENDAR_CREDENTIALS_JSON} environment variable, set in the
+     * server's {@code .env} file next to {@code docker-compose.yml}. When blank
+     * (e.g. local dev) the classpath resource is used instead.
      */
     @Value("${google.calendar.credentials-json:}")
     private String credentialsJson;
