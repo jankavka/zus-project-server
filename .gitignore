@@ -59,3 +59,6 @@ backup.sql
 
 ### DB dumps contain real user emails/password hashes ###
 zus_dump.sql
+
+### local-only DB spec docs, not shared with the team or deployed ###
+/docs/
