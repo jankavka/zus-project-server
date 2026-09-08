@@ -80,6 +80,37 @@ class YoutubeServiceImplTest {
     }
 
     @Test
+    void fetchAllVideos_prefersHighestResolutionThumbnail() throws Exception {
+        when(channelsList.execute()).thenReturn(channelRespWithUploads("UPLOADS_PL"));
+
+        when(youtube.playlistItems()).thenReturn(playlistItems);
+        when(playlistItems.list("snippet")).thenReturn(playlistList);
+        when(playlistList.setPlaylistId(anyString())).thenReturn(playlistList);
+        when(playlistList.setMaxResults(anyLong())).thenReturn(playlistList);
+        when(playlistList.setPageToken(any())).thenReturn(playlistList);
+        when(playlistList.setKey(anyString())).thenReturn(playlistList);
+
+        // v1 has a maxres thumb -> it wins; v2 only has high -> falls back to it
+        ThumbnailDetails full = new ThumbnailDetails()
+                .setDefault(new Thumbnail().setUrl("http://thumb/default.jpg"))
+                .setHigh(new Thumbnail().setUrl("http://thumb/high.jpg"))
+                .setMaxres(new Thumbnail().setUrl("http://thumb/maxres.jpg"));
+        ThumbnailDetails highOnly = new ThumbnailDetails()
+                .setDefault(new Thumbnail().setUrl("http://thumb/default2.jpg"))
+                .setHigh(new Thumbnail().setUrl("http://thumb/high2.jpg"));
+
+        when(playlistList.execute()).thenReturn(page(List.of(
+                item("v1", "T1", "D1", full),
+                item("v2", "T2", "D2", highOnly)
+        ), null));
+
+        List<YouTubeVideoDTO> out = service.fetchAllVideos();
+
+        assertEquals("http://thumb/maxres.jpg", out.get(0).getThumbnailUrl());
+        assertEquals("http://thumb/high2.jpg", out.get(1).getThumbnailUrl());
+    }
+
+    @Test
     void fetchAllVideos_withPagination_fetchesAllPages() throws Exception {
         when(channelsList.execute()).thenReturn(channelRespWithUploads("UPLOADS_PL"));
 
@@ -147,9 +178,11 @@ class YoutubeServiceImplTest {
     }
 
     private static PlaylistItem item(String videoId, String title, String desc, String thumbUrl) {
+        return item(videoId, title, desc, new ThumbnailDetails().setDefault(new Thumbnail().setUrl(thumbUrl)));
+    }
+
+    private static PlaylistItem item(String videoId, String title, String desc, ThumbnailDetails thumbs) {
         ResourceId rid = new ResourceId().setVideoId(videoId);
-        Thumbnail def = new Thumbnail().setUrl(thumbUrl);
-        ThumbnailDetails thumbs = new ThumbnailDetails().setDefault(def);
         PlaylistItemSnippet sn = new PlaylistItemSnippet()
                 .setTitle(title)
                 .setDescription(desc)

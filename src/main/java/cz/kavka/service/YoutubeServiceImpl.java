@@ -5,6 +5,8 @@ import com.google.api.services.youtube.model.ChannelListResponse;
 import com.google.api.services.youtube.model.PlaylistItem;
 import com.google.api.services.youtube.model.PlaylistItemListResponse;
 import com.google.api.services.youtube.model.PlaylistItemSnippet;
+import com.google.api.services.youtube.model.Thumbnail;
+import com.google.api.services.youtube.model.ThumbnailDetails;
 import cz.kavka.dto.YouTubeVideoDTO;
 import cz.kavka.service.serviceinterface.YouTubeService;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,12 +63,39 @@ public class YoutubeServiceImpl implements YouTubeService {
                         snippet.getTitle(),
                         snippet.getDescription(),
                         snippet.getResourceId().getVideoId(),
-                        snippet.getThumbnails().getDefault().getUrl()
+                        bestThumbnailUrl(snippet.getThumbnails())
                 ));
             }
             nextPageToken = response.getNextPageToken();
         } while (nextPageToken != null);
 
         return videoList;
+    }
+
+    /**
+     * Picks the highest-resolution thumbnail YouTube offers for a video, falling
+     * back down the size chain: maxres (1280x720) -> standard (640x480) ->
+     * high (480x360) -> medium (320x180) -> default (120x90). Only maxres and
+     * standard may be absent, so the lower sizes guarantee a non-null result.
+     */
+    private static String bestThumbnailUrl(ThumbnailDetails thumbnails) {
+        if (thumbnails == null) {
+            return null;
+        }
+        for (Thumbnail thumbnail : List.of(
+                nullToEmpty(thumbnails.getMaxres()),
+                nullToEmpty(thumbnails.getStandard()),
+                nullToEmpty(thumbnails.getHigh()),
+                nullToEmpty(thumbnails.getMedium()),
+                nullToEmpty(thumbnails.getDefault()))) {
+            if (thumbnail.getUrl() != null) {
+                return thumbnail.getUrl();
+            }
+        }
+        return null;
+    }
+
+    private static Thumbnail nullToEmpty(Thumbnail thumbnail) {
+        return thumbnail != null ? thumbnail : new Thumbnail();
     }
 }
