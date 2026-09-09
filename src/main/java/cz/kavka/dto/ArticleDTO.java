@@ -1,7 +1,6 @@
 package cz.kavka.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.websocket.OnOpen;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

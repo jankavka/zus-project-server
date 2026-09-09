@@ -1,7 +1,6 @@
 package cz.kavka.controller;
 
 import cz.kavka.dto.SchoolAchievementsDTO;
-import cz.kavka.dto.SchoolYearDTO;
 import cz.kavka.service.SchoolAchievementsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

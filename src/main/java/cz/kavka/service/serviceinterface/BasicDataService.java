@@ -3,7 +3,6 @@ package cz.kavka.service.serviceinterface;
 import cz.kavka.dto.BasicDataDTO;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 
 public interface BasicDataService {

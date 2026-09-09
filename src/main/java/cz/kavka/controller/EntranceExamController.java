@@ -1,6 +1,5 @@
 package cz.kavka.controller;
 
-import com.google.api.services.calendar.Calendar;
 import cz.kavka.dto.EntranceExamDTO;
 import cz.kavka.service.serviceinterface.EntranceExamService;
 import org.springframework.beans.factory.annotation.Autowired;

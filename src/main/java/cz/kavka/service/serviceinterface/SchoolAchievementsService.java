@@ -1,8 +1,6 @@
 package cz.kavka.service.serviceinterface;
 
 import cz.kavka.dto.SchoolAchievementsDTO;
-import cz.kavka.dto.SchoolYearDTO;
-import cz.kavka.entity.SchoolYearEntity;
 
 import java.util.List;
 

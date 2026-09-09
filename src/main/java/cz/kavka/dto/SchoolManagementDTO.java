@@ -2,7 +2,6 @@ package cz.kavka.dto;
 
 import cz.kavka.constant.ManagementType;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.Date;
