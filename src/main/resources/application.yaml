@@ -61,6 +61,9 @@ entrance-exam:
 title-and-content:
   file-path: ./data/title-and-content.json
 
+school-year-link:
+  file-path: ./data/school-year-link.json
+
 app:
   search:
     siteDomain: zusdh.cz
