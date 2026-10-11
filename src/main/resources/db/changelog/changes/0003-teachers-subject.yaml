@@ -1,0 +1,18 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 0003-teachers-subject
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          columnExists:
+            tableName: teachers
+            columnName: subject
+      changes:
+        - addColumn:
+            tableName: teachers
+            columns:
+              - column:
+                  name: subject
+                  type: VARCHAR(255)

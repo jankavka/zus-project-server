@@ -30,5 +30,8 @@ public class TeachersEntity {
     private String telNumber;
 
     @Column
+    private String subject;
+
+    @Column
     private LocalDate issuedDate = LocalDate.now();
 }
