@@ -17,5 +17,7 @@ public class TeachersDTO {
 
     private String telNumber;
 
+    private String subject;
+
     private Date issuedDate;
 }
