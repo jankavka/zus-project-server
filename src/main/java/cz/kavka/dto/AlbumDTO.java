@@ -1,6 +1,7 @@
 package cz.kavka.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +14,10 @@ public class AlbumDTO {
     private String albumName;
 
     private String leadPictureUrl;
+
+    // Focal point of the cover crop as CSS object-position, e.g. "50% 25%"; null = centre
+    @Pattern(regexp = "^(100|\\d{1,2})% (100|\\d{1,2})%$")
+    private String leadPicturePosition;
 
     private String albumDescription;
 

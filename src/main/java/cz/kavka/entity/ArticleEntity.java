@@ -27,4 +27,7 @@ public class ArticleEntity {
 
     private String imageUrl;
 
+    @Column(length = 20)
+    private String imagePosition;
+
 }
