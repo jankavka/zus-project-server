@@ -38,10 +38,10 @@ class ArticleServiceImplTest {
     @Test
     void createArticle_returnsSavedDto() {
         var date = LocalDate.of(2025, 8, 12);
-        var inDto = new ArticleDTO(null, "T", "C", date, "URL");
-        var toSave = new ArticleEntity(null, "T", "C", date, "URL");
-        var saved = new ArticleEntity(1L, "T", "C", date, "URL");
-        var outDto = new ArticleDTO(1L, "T", "C", date, "URL");
+        var inDto = new ArticleDTO(null, "T", "C", date, "URL", null);
+        var toSave = new ArticleEntity(null, "T", "C", date, "URL", null);
+        var saved = new ArticleEntity(1L, "T", "C", date, "URL", null);
+        var outDto = new ArticleDTO(1L, "T", "C", date, "URL", null);
 
         when(articleMapper.toEntity(inDto)).thenReturn(toSave);
         when(articleRepository.save(toSave)).thenReturn(saved);
@@ -58,10 +58,10 @@ class ArticleServiceImplTest {
     @Test
     void getAll_returnsMappedList_andUsesCorrectPageable() {
         int limit = 2, page = 1; // page index is zero-based
-        var e1 = new ArticleEntity(3L, "A", "a", LocalDate.of(2025, 8, 1), "U1");
-        var e2 = new ArticleEntity(2L, "B", "b", LocalDate.of(2025, 8, 2), "U2");
-        var d1 = new ArticleDTO(3L, "A", "a", e1.getIssuedDate(), "U1");
-        var d2 = new ArticleDTO(2L, "B", "b", e2.getIssuedDate(), "U2");
+        var e1 = new ArticleEntity(3L, "A", "a", LocalDate.of(2025, 8, 1), "U1", null);
+        var e2 = new ArticleEntity(2L, "B", "b", LocalDate.of(2025, 8, 2), "U2", null);
+        var d1 = new ArticleDTO(3L, "A", "a", e1.getIssuedDate(), "U1", null);
+        var d2 = new ArticleDTO(2L, "B", "b", e2.getIssuedDate(), "U2", null);
 
         when(articleRepository.findAll(any(Pageable.class)))
                 .thenReturn(new PageImpl<>(List.of(e1, e2)));
@@ -83,8 +83,8 @@ class ArticleServiceImplTest {
     // ------- getArticle -------
     @Test
     void getArticle_returnsDto_whenFound() {
-        var e = new ArticleEntity(10L, "T", "C", LocalDate.of(2025, 8, 10), "URL");
-        var d = new ArticleDTO(10L, "T", "C", e.getIssuedDate(), "URL");
+        var e = new ArticleEntity(10L, "T", "C", LocalDate.of(2025, 8, 10), "URL", null);
+        var d = new ArticleDTO(10L, "T", "C", e.getIssuedDate(), "URL", null);
 
         when(articleRepository.findById(10L)).thenReturn(Optional.of(e));
         when(articleMapper.toDTO(e)).thenReturn(d);
@@ -113,10 +113,10 @@ class ArticleServiceImplTest {
     // ------- getArticles by album name -------
     @Test
     void getArticles_returnsMappedList() {
-        var e1 = new ArticleEntity(1L, "T1", "C1", LocalDate.of(2025, 7, 1), "ALB");
-        var e2 = new ArticleEntity(2L, "T2", "C2", LocalDate.of(2025, 7, 2), "ALB");
-        var d1 = new ArticleDTO(1L, "T1", "C1", e1.getIssuedDate(), "ALB");
-        var d2 = new ArticleDTO(2L, "T2", "C2", e2.getIssuedDate(), "ALB");
+        var e1 = new ArticleEntity(1L, "T1", "C1", LocalDate.of(2025, 7, 1), "ALB", null);
+        var e2 = new ArticleEntity(2L, "T2", "C2", LocalDate.of(2025, 7, 2), "ALB", null);
+        var d1 = new ArticleDTO(1L, "T1", "C1", e1.getIssuedDate(), "ALB", null);
+        var d2 = new ArticleDTO(2L, "T2", "C2", e2.getIssuedDate(), "ALB", null);
 
         when(articleRepository.getArticles("Album")).thenReturn(List.of(e1, e2));
         when(articleMapper.toDTO(e1)).thenReturn(d1);
@@ -139,10 +139,10 @@ class ArticleServiceImplTest {
     @Test
     void editArticle_updatesAndReturnsDto_whenExists() {
         var id = 5L;
-        var dtoIn   = new ArticleDTO(null, "NewTitle", "NewBody", LocalDate.of(2025, 8, 4), "U");
-        var mapped  = new ArticleEntity(null, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U");
-        var saved   = new ArticleEntity(id, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U");
-        var dtoOut  = new ArticleDTO(id, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U");
+        var dtoIn   = new ArticleDTO(null, "NewTitle", "NewBody", LocalDate.of(2025, 8, 4), "U", null);
+        var mapped  = new ArticleEntity(null, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U", null);
+        var saved   = new ArticleEntity(id, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U", null);
+        var dtoOut  = new ArticleDTO(id, "NewTitle", "NewBody", dtoIn.getIssuedDate(), "U", null);
 
         when(articleRepository.findById(id)).thenReturn(Optional.of(new ArticleEntity()));
         when(articleMapper.toEntity(dtoIn)).thenReturn(mapped);
@@ -171,8 +171,8 @@ class ArticleServiceImplTest {
     // ------- deleteArticle -------
     @Test
     void deleteArticle_deletesAndReturnsDto() {
-        var e = new ArticleEntity(7L, "T", "C", LocalDate.of(2025, 8, 3), "URL");
-        var d = new ArticleDTO(7L, "T", "C", e.getIssuedDate(), "URL");
+        var e = new ArticleEntity(7L, "T", "C", LocalDate.of(2025, 8, 3), "URL", null);
+        var d = new ArticleDTO(7L, "T", "C", e.getIssuedDate(), "URL", null);
 
         when(articleRepository.findById(7L)).thenReturn(Optional.of(e));
         when(articleMapper.toDTO(e)).thenReturn(d);
