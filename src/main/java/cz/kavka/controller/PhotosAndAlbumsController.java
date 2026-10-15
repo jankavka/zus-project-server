@@ -3,6 +3,7 @@ package cz.kavka.controller;
 import cz.kavka.dto.AlbumDTO;
 import cz.kavka.dto.ImageDTO;
 import cz.kavka.service.serviceinterface.PhotoAndAlbumService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -31,7 +32,7 @@ public class PhotosAndAlbumsController {
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/new-album")
-    public AlbumDTO saveAlbum(@RequestBody AlbumDTO albumDTO) throws IOException{
+    public AlbumDTO saveAlbum(@Valid @RequestBody AlbumDTO albumDTO) throws IOException{
         return photoService.createAlbum(albumDTO);
     }
 
@@ -74,7 +75,7 @@ public class PhotosAndAlbumsController {
 
     @Secured("ROLE_ADMIN")
     @PutMapping("/edit-album/{albumName}")
-    public AlbumDTO editAlbum(@PathVariable String albumName, @RequestBody AlbumDTO albumDTO) throws IOException{
+    public AlbumDTO editAlbum(@PathVariable String albumName, @Valid @RequestBody AlbumDTO albumDTO) throws IOException{
         return photoService.editAlbumInfo(albumName, albumDTO);
     }
 

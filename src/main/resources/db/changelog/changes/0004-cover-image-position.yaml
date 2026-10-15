@@ -1,0 +1,35 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 0004-article-image-position
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          columnExists:
+            tableName: article
+            columnName: image_position
+      changes:
+        - addColumn:
+            tableName: article
+            columns:
+              - column:
+                  name: image_position
+                  type: VARCHAR(20)
+
+  - changeSet:
+      id: 0004-album-lead-picture-position
+      author: jankavka
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          columnExists:
+            tableName: album_entity
+            columnName: lead_picture_position
+      changes:
+        - addColumn:
+            tableName: album_entity
+            columns:
+              - column:
+                  name: lead_picture_position
+                  type: VARCHAR(20)

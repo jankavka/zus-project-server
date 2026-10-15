@@ -25,6 +25,9 @@ public class AlbumEntity {
     @Column
     private String leadPictureUrl;
 
+    @Column(length = 20)
+    private String leadPicturePosition;
+
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     private List<ImageEntity> images;
 
