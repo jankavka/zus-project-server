@@ -2,6 +2,8 @@
 
 REST API backend for a Czech Basic Art School (Základní umělecká škola) website. The system manages school data, personnel, achievements, photo galleries, documents, calendar events, and user accounts.
 
+**Live:** https://www.zusdh.cz (frontend: [`zus-project-client`](https://github.com/jankavka/zus-project-client))
+
 ## Tech Stack
 
 - **Java 21** + **Spring Boot 3.4.3**
@@ -258,6 +260,14 @@ Schema changes are managed by Liquibase, not Hibernate auto-DDL (`spring.jpa.hib
 2. **deploy** job (needs `test`) - SSHes into the Hetzner host and runs `~/apps/deploy.sh`
 
 Requires the repo secrets `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`.
+
+### Production
+
+- Hosted on a **Hetzner** VPS; the whole stack (Nginx + frontend, backend, MySQL, certbot) runs from `docker-compose.yml`
+- Domain **zusdh.cz** — `nginx/default.conf` redirects HTTP → HTTPS and `zusdh.cz` → `www.zusdh.cz` (canonical)
+- TLS certificates from **Let's Encrypt**, renewed by the `certbot` service via the webroot challenge (`/.well-known/acme-challenge/`)
+- `nginx/ip-only.conf` is a plain-HTTP fallback config (serves the site on the bare server IP, keeps the ACME path) for use without the domain/certificate
+- Both repos deploy through the same `~/apps/deploy.sh` on the server (guarded by a `flock`, so near-simultaneous pushes queue instead of colliding)
 
 ## License
 
