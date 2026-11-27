@@ -12,6 +12,7 @@ services:
    # multi-stage that ends on nginx
 
     container_name: zus-frontend
+    restart: unless-stopped
     depends_on:
       - backend
     ports:
@@ -55,6 +56,7 @@ services:
   backend:
     build: .
     container_name: zus-backend
+    restart: unless-stopped
     volumes:
       - ./data:/app/data
       - ./uploads:/app/uploads
